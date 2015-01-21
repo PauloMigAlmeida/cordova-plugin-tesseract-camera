@@ -70,7 +70,7 @@ THE SOFTWARE.
         <source-file src="src/ios/LDCFoundationCameraView.m" />
 
         <framework src="AVFoundation.framework" weak="false" />
-	<framework src="src/ios/TesseractOCR.framework" custom="true" weak="false"/>
+	<framework src="src/ios/libs/TesseractOCR.framework" custom="true" weak="false"/>
     </platform>
 
     <!-- android -->
