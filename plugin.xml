@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+The MIT License (MIT)
+
+Copyright (c) 2014 Paulo Miguel Almeida Rodenas <paulo.ubuntu@gmail.com>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+-->
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="br.com.loducca.instagraacc.cordova.plugin.camera"
+        version="0.0.1">
+
+    <name>InstaGraac Camera</name>
+
+    <description>
+        Provides access to custom camera where user will be able
+	to select a few rects and then Tesseract will recognize
+	some important tax receipt fields.
+    </description>
+
+    <repo>
+        https://github.com/pauloubuntu/cordova-plugin-instagraacc-camera.git
+    </repo>
+
+    <keywords>
+        pauloubuntu, loducca, instagraac, camera, tax, receipt
+    </keywords>
+
+    <license>MIT</license>
+
+    <author>Paulo Miguel Almeida Rodenas</author>
+
+    <engines>
+        <engine name="cordova" version=">=4.2.0" />
+    </engines>
+
+    <!-- interface -->
+    <js-module src="www/instagraacc_camera.js" name="InstaGraaccCamera">
+        <clobbers target="cordova.plugins.instagraacc.camera" />
+        <clobbers target="plugin.instagraacc.camera" />
+    </js-module>
+
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="InstaGraaccCamera">
+                <param name="ios-package" value="LDCInstaGraaccCamera"/>
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/LDCFoundationCameraView.h" />
+        <source-file src="src/ios/LDCFoundationCameraView.m" />
+
+        <framework src="AVFoundation.framework" weak="true" />
+    </platform>
+
+    <!-- android -->
+    <!--
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="InstaGraaccCamera">
+                <param name="android-package"
+                       value="br.com.loducca.instagraacc.cordova.plugin.camera.InstaGraaccCamera"/>
+            </feature>
+        </config-file>
+
+        <source-file
+            src="src/android/InstaGraaccCamera.java"
+            target-dir="src/br/com/loducca/instagraacc/cordova/plugin/camera" />
+
+    </platform>
+    -->
+</plugin>
