@@ -69,7 +69,7 @@ THE SOFTWARE.
         <header-file src="src/ios/LDCFoundationCameraView.h" />
         <source-file src="src/ios/LDCFoundationCameraView.m" />
 
-        <framework src="AVFoundation.framework" weak="true" />
+        <framework src="AVFoundation.framework" weak="false" />
     </platform>
 
     <!-- android -->
