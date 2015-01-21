@@ -28,3 +28,6 @@ Pods/
 #Cordova
 /platforms
 /out
+
+#Mac
+.DS_Store
