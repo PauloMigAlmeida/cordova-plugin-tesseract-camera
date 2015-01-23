@@ -77,7 +77,7 @@ THE SOFTWARE.
 	<framework src="CoreImage.framework" />
 	<framework src="libc++.dylib" />
 
-	<source-file src="tessdata" target-dir="tessdata" />
+	<!-- <source-file src="tessdata" target-dir="tessdata" /> -->
     </platform>
 
     <!-- android -->
