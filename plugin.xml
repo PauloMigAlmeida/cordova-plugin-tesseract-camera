@@ -70,6 +70,8 @@ THE SOFTWARE.
         <source-file src="src/ios/LDCFoundationCameraView.m" />
 	<header-file src="src/ios/LDCTesseractImageRecognizer.h" />
         <source-file src="src/ios/LDCTesseractImageRecognizer.m" />
+	<header-file src="src/ios/LDCTesseractImageRecognizerPlugin.h" />
+        <source-file src="src/ios/LDCTesseractImageRecognizerPlugin.m" />
 
         <framework src="AVFoundation.framework" weak="false" />
 	<framework src="src/ios/libs/TesseractOCR.framework" custom="true" weak="false"/>
