@@ -1,8 +1,8 @@
 //
 //  LDCTesseractImageRecognizer.m
-//  InstaGraacCamera
+//  InstaGraacCamera2
 //
-//  Created by Paulo Miguel Almeida on 1/21/15.
+//  Created by Paulo Miguel Almeida on 1/23/15.
 //  Copyright (c) 2015 Loducca Publicidade. All rights reserved.
 //
 
@@ -25,19 +25,19 @@
     return self;
 }
 
--(void)recognizeText:(UIImage *)image AndMaskInput:(NSString *)maskInput AndCallback:(void(^)())callback
+-(void)recognizeText:(UIImage *)image AndMaskInput:(NSString *)maskInput
 {
-
-    UIImage *bwImage = [image g8_blackAndWhite];
-
+    
+    UIImage *bwImage = image;
+    
     G8RecognitionOperation *operation = [[G8RecognitionOperation alloc] init];
     
     operation.tesseract.language = @"eng";
-
+    
     operation.tesseract.engineMode = G8OCREngineModeTesseractOnly;
     
     operation.tesseract.pageSegmentationMode = G8PageSegmentationModeAutoOnly;
-
+    
     operation.tesseract.charWhitelist = maskInput;
     
     operation.tesseract.image = bwImage;
@@ -53,8 +53,7 @@
 #ifdef DEBUG
         NSLog(@"%@", recognizedText);
 #endif
-        callback();
-        
+       
         // Spawn an alert with the recognized text
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"OCR Result"
                                                         message:recognizedText

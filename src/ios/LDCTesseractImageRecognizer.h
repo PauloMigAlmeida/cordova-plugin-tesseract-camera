@@ -1,8 +1,8 @@
 //
 //  LDCTesseractImageRecognizer.h
-//  InstaGraacCamera
+//  InstaGraacCamera2
 //
-//  Created by Paulo Miguel Almeida on 1/21/15.
+//  Created by Paulo Miguel Almeida on 1/23/15.
 //  Copyright (c) 2015 Loducca Publicidade. All rights reserved.
 //
 
@@ -11,8 +11,9 @@
 #import <TesseractOCR/TesseractOCR.h>
 #import <TesseractOCR/G8RecognitionOperation.h>
 
+
 @interface LDCTesseractImageRecognizer : NSObject
 
--(void) recognizeText:(UIImage*) image AndMaskInput:(NSString*) maskInput AndCallback:(void(^)())callback;
+-(void) recognizeText:(UIImage*) image AndMaskInput:(NSString*) maskInput;
 
 @end

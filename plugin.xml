@@ -71,6 +71,8 @@ THE SOFTWARE.
 
         <framework src="AVFoundation.framework" weak="false" />
 	<framework src="src/ios/libs/TesseractOCR.framework" custom="true" weak="false"/>
+    	<framework src="libstdc++.6.0.9.dylib" />
+	<framework src="CoreImage.framework" />
     </platform>
 
     <!-- android -->
