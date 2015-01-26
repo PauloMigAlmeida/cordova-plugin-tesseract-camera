@@ -28,7 +28,7 @@ THE SOFTWARE.
         id="br.com.loducca.instagraacc.cordova.plugin.camera"
         version="0.0.1">
 
-    <name>InstaGraac Camera</name>
+    <name>Cordova Plugin Tesseract Camera</name>
 
     <description>
         Provides access to custom camera where user will be able
@@ -37,11 +37,11 @@ THE SOFTWARE.
     </description>
 
     <repo>
-        https://github.com/pauloubuntu/cordova-plugin-instagraacc-camera.git
+        https://github.com/pauloubuntu/cordova-plugin-tesseract-camera.git
     </repo>
 
     <keywords>
-        pauloubuntu, loducca, instagraac, camera, tax, receipt
+        pauloubuntu, loducca, tesseract, camera, tax, receipt
     </keywords>
 
     <license>MIT</license>
@@ -61,8 +61,8 @@ THE SOFTWARE.
     <!-- ios -->
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
-            <feature name="InstaGraaccCamera">
-                <param name="ios-package" value="LDCInstaGraaccCamera"/>
+            <feature name="CordovaTesseractCamera">
+                <param name="ios-package" value="LDCTesseractImageRecognizerPlugin"/>
             </feature>
         </config-file>
 
