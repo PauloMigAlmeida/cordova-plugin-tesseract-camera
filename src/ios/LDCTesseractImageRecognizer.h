@@ -11,9 +11,10 @@
 #import <TesseractOCR/TesseractOCR.h>
 #import <TesseractOCR/G8RecognitionOperation.h>
 
-
 @interface LDCTesseractImageRecognizer : NSObject
 
--(void) recognizeText:(UIImage*) image AndMaskInput:(NSString*) maskInput;
+-(void)recognizeText:(UIImage *)image;
+
+-(void)recognizeText:(UIImage *)image AndCharWhitelist:(NSString *)charWhitelist;
 
 @end

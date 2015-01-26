@@ -13,12 +13,17 @@
 -(void)recognizeImage:(CDVInvokedUrlCommand *)command
 {
     NSString* imagePath = (NSString*)[command.arguments objectAtIndex:0];
+    NSString* charWhiteList = (NSString*)[command.arguments objectAtIndex:1];
     
-    LDCTesseractImageRecognizer* tesseract = [[LDCTesseractImageRecognizer alloc] init];
-    [tesseract recognizeText:[UIImage imageNamed:imagePath] AndMaskInput:@"0123456789"];
-    
-    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"OK"];
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    [self.commandDelegate runInBackground:^{
+        
+        LDCTesseractImageRecognizer* tesseract = [[LDCTesseractImageRecognizer alloc] init];
+        
+        [tesseract recognizeText:[UIImage imageNamed:imagePath] AndCharWhitelist:charWhiteList];
+        
+        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"OK"];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }];
     
 }
 @end

@@ -25,7 +25,12 @@
     return self;
 }
 
--(void)recognizeText:(UIImage *)image AndMaskInput:(NSString *)maskInput
+-(void)recognizeText:(UIImage *)image
+{
+    [self recognizeText:image AndCharWhitelist:nil];
+}
+
+-(void)recognizeText:(UIImage *)image AndCharWhitelist:(NSString *)charWhitelist
 {
     
     UIImage *bwImage = image;
@@ -38,7 +43,9 @@
     
     operation.tesseract.pageSegmentationMode = G8PageSegmentationModeAutoOnly;
     
-    operation.tesseract.charWhitelist = maskInput;
+    if(charWhitelist){
+        operation.tesseract.charWhitelist = charWhitelist;
+    }
     
     operation.tesseract.image = bwImage;
     

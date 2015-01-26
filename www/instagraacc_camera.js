@@ -1,5 +1,5 @@
 var exec = cordova.require('cordova/exec');
 
-exports.recognize = function () {
-    exec(function(){console.log('Success');}, function(){console.log('Fail');}, 'CordovaTesseractCamera', 'recognizeImage', ['image_sample.jpg']);
+exports.recognize = function (imageSourceURL, charWhiteList, callbackSuccess, callbackFailure) {
+    exec(function(){callbackSuccess();}, function(){callbackFailure();}, 'CordovaTesseractCamera', 'recognizeImage', [imageSourceURL, charWhiteList]);
 };
