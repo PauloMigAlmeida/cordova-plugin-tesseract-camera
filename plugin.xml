@@ -53,17 +53,20 @@ THE SOFTWARE.
     </engines>
 
     <!-- interface -->
-    <js-module src="www/instagraacc_camera.js" name="InstaGraaccCamera">
-        <clobbers target="cordova.plugins.instagraacc.camera" />
-        <clobbers target="plugin.instagraacc.camera" />
+    <js-module src="www/tesseract_camera.js" name="TesseractCamera">
+        <clobbers target="cordova.plugins.tesseract.camera" />
+        <clobbers target="plugin.tesseract.camera" />
     </js-module>
 
     <!-- ios -->
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
-            <feature name="CordovaTesseractCamera">
+            <feature name="CordovaTesseractImageRecognizer">
                 <param name="ios-package" value="LDCTesseractImageRecognizerPlugin"/>
-            </feature>
+	    </feature>
+	    <feature name="CordovaTesseractCamera">
+		<param name="ios-package" value="LDCFoundationCameraViewPlugin" />
+	    </feature>
         </config-file>
 
         <header-file src="src/ios/LDCFoundationCameraView.h" />
@@ -72,6 +75,8 @@ THE SOFTWARE.
         <source-file src="src/ios/LDCTesseractImageRecognizer.m" />
 	<header-file src="src/ios/LDCTesseractImageRecognizerPlugin.h" />
         <source-file src="src/ios/LDCTesseractImageRecognizerPlugin.m" />
+	<header-file src="src/ios/LDCFoundationCameraViewPlugin.h" />
+	<source-file src="src/ios/LDCFoundationCameraViewPlugin.m" />
 
         <framework src="AVFoundation.framework" weak="false" />
 	<framework src="src/ios/libs/TesseractOCR.framework" custom="true" weak="false"/>
