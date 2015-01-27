@@ -11,6 +11,8 @@
 //Libraries
 #import <Cordova/CDV.h>
 #import <Cordova/CDVPlugin.h>
+#import <AVFoundation/AVFoundation.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 
 //Local Files
 #import "LDCFoundationCameraView.h"

@@ -78,8 +78,9 @@ THE SOFTWARE.
 	<header-file src="src/ios/LDCFoundationCameraViewPlugin.h" />
 	<source-file src="src/ios/LDCFoundationCameraViewPlugin.m" />
 
-        <framework src="AVFoundation.framework" weak="false" />
-	<framework src="src/ios/libs/TesseractOCR.framework" custom="true" weak="false"/>
+	<framework src="AVFoundation.framework" />
+	<framework src="AssetsLibrary.framework" />
+	<framework src="src/ios/libs/TesseractOCR.framework" custom="true" />
     	<framework src="libstdc++.6.0.9.dylib" />
 	<framework src="CoreImage.framework" />
 	<framework src="libc++.dylib" />
