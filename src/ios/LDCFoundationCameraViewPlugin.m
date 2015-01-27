@@ -45,6 +45,7 @@
     
     //Creating LDCFoundationCameraView instance
     self.cameraView = [[LDCFoundationCameraView alloc] initWithFrame:viewRect];
+    self.cameraView.backgroundColor = [UIColor redColor]; // Just for testing
     //Adding it to webview
     [self.webView.superview addSubview:self.cameraView];
     
