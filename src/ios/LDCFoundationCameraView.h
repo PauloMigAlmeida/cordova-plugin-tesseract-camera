@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+//Libraries
+#import <Cordova/CDV.h>
+#import <Cordova/CDVPlugin.h>
 #import <AVFoundation/AVFoundation.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface LDCFoundationCameraView : UIView
 
-@property (nonatomic) AVCaptureSession *session;
+-(void) initializeCamera;
 
 @end
