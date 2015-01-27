@@ -115,6 +115,10 @@
         
     });
     
+    dispatch_async([self sessionQueue], ^{
+        [[self session] startRunning];
+    });
+    
 }
 
 #pragma mark - AVFoundation methods
