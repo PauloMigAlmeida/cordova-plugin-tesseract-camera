@@ -30,6 +30,8 @@
     
     UIButton *stillImageCaptureButton = [[UIButton alloc] initWithFrame:stillImageCaptureButtonRect];
     [stillImageCaptureButton setImage:[UIImage imageNamed:@"btnFotografarNotinha.png"] forState:UIControlStateNormal];
+    
+    [self addSubview:stillImageCaptureButton];
 }
 
 @end
