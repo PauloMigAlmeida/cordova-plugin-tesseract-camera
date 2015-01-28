@@ -108,28 +108,53 @@
                                          );
     self.footerView = [[LDCFoundationCameraFooterView alloc] initWithFrame:cameraFooterRect];
     self.footerView.delegate = self;
+    [self addSubview:self.footerView];
     
     
     //Adding Corner Markers
+    CGRect usableArea = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height - FOOTER_DEFAULT_HEIGHT);
     CGSize defaultCornerSize = CGSizeMake(64, 55);
     
-    UIImageView *cornerUpperLeft = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, defaultCornerSize.width, defaultCornerSize.height)];
+    UIImageView *cornerUpperLeft = [[UIImageView alloc] initWithFrame:CGRectMake(
+                                                                                 (usableArea.size.width * 0.08),
+                                                                                 (usableArea.size.height * 0.08),
+                                                                                 defaultCornerSize.width,
+                                                                                 defaultCornerSize.height
+                                                                                 )];
     cornerUpperLeft.image = [UIImage imageNamed:@"corner_upper_left.png"];
     cornerUpperLeft.backgroundColor = [UIColor clearColor];
     
-    UIImageView *cornerUpperRight = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, defaultCornerSize.width, defaultCornerSize.height)];
+    UIImageView *cornerUpperRight = [[UIImageView alloc] initWithFrame:CGRectMake(
+                                                                                  (usableArea.size.width * 0.92),
+                                                                                  (usableArea.size.height * 0.08),
+                                                                                  defaultCornerSize.width,
+                                                                                  defaultCornerSize.height
+                                                                                  )];
     cornerUpperRight.image = [UIImage imageNamed:@"corner_upper_right.png"];
     cornerUpperRight.backgroundColor = [UIColor clearColor];
     
-    UIImageView *cornerBottomLeft = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, defaultCornerSize.width, defaultCornerSize.height)];
+    UIImageView *cornerBottomLeft = [[UIImageView alloc] initWithFrame:CGRectMake(
+                                                                                  (usableArea.size.width * 0.08),
+                                                                                  (usableArea.size.height * 0.92),
+                                                                                  defaultCornerSize.width,
+                                                                                  defaultCornerSize.height
+                                                                                  )];
     cornerBottomLeft.image = [UIImage imageNamed:@"corner_bottom_left.png"];
     cornerBottomLeft.backgroundColor = [UIColor clearColor];
     
-    UIImageView *cornerBottomRight = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, defaultCornerSize.width, defaultCornerSize.height)];
-    cornerUpperLeft.image = [UIImage imageNamed:@"corner_bottom_right.png"];
-    cornerUpperLeft.backgroundColor = [UIColor clearColor];
+    UIImageView *cornerBottomRight = [[UIImageView alloc] initWithFrame:CGRectMake(
+                                                                                   (usableArea.size.width * 0.92),
+                                                                                   (usableArea.size.height * 0.92),
+                                                                                   defaultCornerSize.width,
+                                                                                   defaultCornerSize.height
+                                                                                   )];
+    cornerBottomRight.image = [UIImage imageNamed:@"corner_bottom_right.png"];
+    cornerBottomRight.backgroundColor = [UIColor clearColor];
     
     [self addSubview:cornerUpperLeft];
+    [self addSubview:cornerUpperRight];
+    [self addSubview:cornerBottomLeft];
+    [self addSubview:cornerBottomRight];
 }
 
 #pragma mark - AVFoundation methods
