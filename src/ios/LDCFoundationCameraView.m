@@ -125,7 +125,7 @@
     cornerUpperLeft.backgroundColor = [UIColor clearColor];
     
     UIImageView *cornerUpperRight = [[UIImageView alloc] initWithFrame:CGRectMake(
-                                                                                  (usableArea.size.width * 0.92),
+                                                                                  (usableArea.size.width * 0.92) - defaultCornerSize.width,
                                                                                   (usableArea.size.height * 0.08),
                                                                                   defaultCornerSize.width,
                                                                                   defaultCornerSize.height
@@ -135,7 +135,7 @@
     
     UIImageView *cornerBottomLeft = [[UIImageView alloc] initWithFrame:CGRectMake(
                                                                                   (usableArea.size.width * 0.08),
-                                                                                  (usableArea.size.height * 0.92),
+                                                                                  (usableArea.size.height * 0.92) - defaultCornerSize.height,
                                                                                   defaultCornerSize.width,
                                                                                   defaultCornerSize.height
                                                                                   )];
@@ -143,8 +143,8 @@
     cornerBottomLeft.backgroundColor = [UIColor clearColor];
     
     UIImageView *cornerBottomRight = [[UIImageView alloc] initWithFrame:CGRectMake(
-                                                                                   (usableArea.size.width * 0.92),
-                                                                                   (usableArea.size.height * 0.92),
+                                                                                   (usableArea.size.width * 0.92) - defaultCornerSize.width,
+                                                                                   (usableArea.size.height * 0.92) - defaultCornerSize.height,
                                                                                    defaultCornerSize.width,
                                                                                    defaultCornerSize.height
                                                                                    )];
