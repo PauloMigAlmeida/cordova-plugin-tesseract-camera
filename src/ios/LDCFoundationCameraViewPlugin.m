@@ -50,27 +50,24 @@
 
     CGRect cameraViewRect = CGRectMake(originx,originy,width,height);
     
-    __weak LDCFoundationCameraViewPlugin* weakSelf = self;
-    
-    [self.commandDelegate runInBackground:^{
 
-        //Creating LDCFoundationCameraView instance
-        self.cameraView = [[LDCFoundationCameraView alloc] initWithFrame:cameraViewRect];
-        self.cameraView.backgroundColor = [UIColor blackColor];
-        self.cameraView.delegate = self;
-        
-        //Creating Close Button
-        UIButton *btnClose = [[UIButton alloc] initWithFrame:CGRectMake(0, 10, 56, 56)];
-        [btnClose setImage:[UIImage imageNamed:@"btn_close.png"] forState:UIControlStateNormal];
-        [btnClose addTarget:self action:@selector(btnCloseHandler) forControlEvents:UIControlEventTouchUpInside];
-
-        //Adding `em to webview
-        [self.webView.superview addSubview:self.cameraView];
-        [self.webView.superview addSubview:btnClose];
+    //Creating LDCFoundationCameraView instance
+    self.cameraView = [[LDCFoundationCameraView alloc] initWithFrame:cameraViewRect];
+    self.cameraView.backgroundColor = [UIColor blackColor];
+    self.cameraView.delegate = self;
     
-        //Initializing AVFoundation
-        [weakSelf.cameraView initializeCamera];
-    }];
+    //Creating Close Button
+    UIButton *btnClose = [[UIButton alloc] initWithFrame:CGRectMake(0, 10, 56, 56)];
+    [btnClose setImage:[UIImage imageNamed:@"btn_close.png"] forState:UIControlStateNormal];
+    [btnClose addTarget:self action:@selector(btnCloseHandler) forControlEvents:UIControlEventTouchUpInside];
+
+    //Adding `em to webview
+    [self.webView.superview addSubview:self.cameraView];
+    [self.webView.superview addSubview:btnClose];
+
+    //Initializing AVFoundation
+    [self.cameraView initializeCamera];
+
     
     
 }
