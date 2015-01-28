@@ -28,6 +28,8 @@
 @end
 
 #define FOOTER_DEFAULT_HEIGHT 132
+#define CORNER_MARKER_DEFAULT_HEIGHT_PERC 8
+#define CORNER_MARKER_DEFAULT_WIDTH_PERC 8
 
 @implementation LDCFoundationCameraView
 
@@ -116,8 +118,8 @@
     CGSize defaultCornerSize = CGSizeMake(64, 55);
     
     UIImageView *cornerUpperLeft = [[UIImageView alloc] initWithFrame:CGRectMake(
-                                                                                 (usableArea.size.width * 0.08),
-                                                                                 (usableArea.size.height * 0.08),
+                                                                                 (usableArea.size.width * (CORNER_MARKER_DEFAULT_WIDTH_PERC / 100)),
+                                                                                 (usableArea.size.height * (CORNER_MARKER_DEFAULT_HEIGHT_PERC / 100)),
                                                                                  defaultCornerSize.width,
                                                                                  defaultCornerSize.height
                                                                                  )];
@@ -125,8 +127,8 @@
     cornerUpperLeft.backgroundColor = [UIColor clearColor];
     
     UIImageView *cornerUpperRight = [[UIImageView alloc] initWithFrame:CGRectMake(
-                                                                                  (usableArea.size.width * 0.92) - defaultCornerSize.width,
-                                                                                  (usableArea.size.height * 0.08),
+                                                                                  (usableArea.size.width * (1 - (CORNER_MARKER_DEFAULT_WIDTH_PERC / 100))) - defaultCornerSize.width,
+                                                                                  (usableArea.size.height * (CORNER_MARKER_DEFAULT_HEIGHT_PERC / 100)),
                                                                                   defaultCornerSize.width,
                                                                                   defaultCornerSize.height
                                                                                   )];
@@ -134,8 +136,8 @@
     cornerUpperRight.backgroundColor = [UIColor clearColor];
     
     UIImageView *cornerBottomLeft = [[UIImageView alloc] initWithFrame:CGRectMake(
-                                                                                  (usableArea.size.width * 0.08),
-                                                                                  (usableArea.size.height * 0.92) - defaultCornerSize.height,
+                                                                                  (usableArea.size.width * (CORNER_MARKER_DEFAULT_WIDTH_PERC / 100)),
+                                                                                  (usableArea.size.height * (1 - (CORNER_MARKER_DEFAULT_HEIGHT_PERC / 100))) - defaultCornerSize.height,
                                                                                   defaultCornerSize.width,
                                                                                   defaultCornerSize.height
                                                                                   )];
@@ -143,8 +145,8 @@
     cornerBottomLeft.backgroundColor = [UIColor clearColor];
     
     UIImageView *cornerBottomRight = [[UIImageView alloc] initWithFrame:CGRectMake(
-                                                                                   (usableArea.size.width * 0.92) - defaultCornerSize.width,
-                                                                                   (usableArea.size.height * 0.92) - defaultCornerSize.height,
+                                                                                   (usableArea.size.width * (1 - (CORNER_MARKER_DEFAULT_WIDTH_PERC / 100))) - defaultCornerSize.width,
+                                                                                   (usableArea.size.height * (1 - (CORNER_MARKER_DEFAULT_HEIGHT_PERC / 100))) - defaultCornerSize.height,
                                                                                    defaultCornerSize.width,
                                                                                    defaultCornerSize.height
                                                                                    )];
