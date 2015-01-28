@@ -19,19 +19,27 @@
 }
 
 -(void) initialize{
-    self.backgroundColor = [UIColor blackColor];
+    self.backgroundColor = [UIColor colorWithRed:0.15 green:0.15 blue:0.15 alpha:1.0];
     
-    CGSize stillImageCaptureButtonSize = CGSizeMake(110, 106);
-    CGRect stillImageCaptureButtonRect = CGRectMake(
-                                                (self.frame.size.width  - stillImageCaptureButtonSize.width ) / 2,
-                                                self.frame.size.height - stillImageCaptureButtonSize.height,
-                                                stillImageCaptureButtonSize.width,
-                                                stillImageCaptureButtonSize.height);
+    CGSize snapStillImageCaptureButtonSize = CGSizeMake(110, 106);
+    CGRect snapStillImageCaptureButtonRect = CGRectMake(
+                                                (self.frame.size.width  - snapStillImageCaptureButtonSize.width ) / 2,
+                                                self.frame.size.height - snapStillImageCaptureButtonSize.height,
+                                                snapStillImageCaptureButtonSize.width,
+                                                snapStillImageCaptureButtonSize.height);
     
-    UIButton *stillImageCaptureButton = [[UIButton alloc] initWithFrame:stillImageCaptureButtonRect];
-    [stillImageCaptureButton setImage:[UIImage imageNamed:@"btnFotografarNotinha.png"] forState:UIControlStateNormal];
+    UIButton *snapStillImageCaptureButton = [[UIButton alloc] initWithFrame:snapStillImageCaptureButtonRect];
+    [snapStillImageCaptureButton setImage:[UIImage imageNamed:@"btnFotografarNotinha.png"] forState:UIControlStateNormal];
+
+    [snapStillImageCaptureButton addTarget:self action:@selector(snapStillImageCameraHandler) forControlEvents:UIControlEventTouchUpInside];
     
-    [self addSubview:stillImageCaptureButton];
+    [self addSubview:snapStillImageCaptureButton];
+}
+
+-(void) snapStillImageCameraHandler{
+    if(self.delegate){
+        [self.delegate snapStillImageCaptureButtonTouched];
+    }
 }
 
 @end

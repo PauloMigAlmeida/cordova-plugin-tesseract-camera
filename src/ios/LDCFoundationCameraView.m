@@ -147,7 +147,7 @@
 }
 
 
--(void) takePhoto{
+-(void) snapStillImage{
     dispatch_async([self sessionQueue], ^{
         // Update the orientation on the still image output video connection before capturing.
         [[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo] setVideoOrientation:[[(AVCaptureVideoPreviewLayer *)[self layer] connection] videoOrientation]];
@@ -181,8 +181,9 @@
                 
                 [[self session] stopRunning];
                 
-                //TODO Call cordova handler to go for the identification screen
-                
+                if(self.delegate){
+                    [self.delegate snapStillImageHasBeenTaken:_imagePhotoTaken];
+                }
             }
         }];
     });

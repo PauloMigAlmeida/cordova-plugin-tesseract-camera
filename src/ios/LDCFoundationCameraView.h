@@ -14,8 +14,17 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 
+@protocol LDCFoundationCameraViewDelegate <NSObject>
+
+-(void) snapStillImageHasBeenTaken:(UIImage*) image;
+
+@end
+
 @interface LDCFoundationCameraView : UIView
 
+@property(nonatomic, retain) id<LDCFoundationCameraViewDelegate> delegate;
+
 -(void) initializeCamera;
+-(void) snapStillImage;
 
 @end

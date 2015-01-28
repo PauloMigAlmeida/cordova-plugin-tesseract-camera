@@ -56,9 +56,11 @@
     //Creating LDCFoundationCameraView instance
     self.cameraView = [[LDCFoundationCameraView alloc] initWithFrame:cameraViewRect];
     self.cameraView.backgroundColor = [UIColor blackColor];
+    self.cameraView.delegate = self;
 
     //Creating LDCFoundationCameraFooterView instance
     self.footerView = [[LDCFoundationCameraFooterView alloc] initWithFrame:cameraFooterRect];
+    self.footerView.delegate = self;
 
     //Adding 'em to webview
     [self.webView.superview addSubview:self.cameraView];
@@ -69,5 +71,17 @@
     
 }
 
+#pragma mark - LDCFoundationCameraFooterViewDelegate methods
+
+-(void)snapStillImageCaptureButtonTouched{
+    [self.cameraView snapStillImage];
+}
+
+#pragma mark - LDCFoundationCameraViewDelegate methods
+
+-(void)snapStillImageHasBeenTaken:(UIImage *)image{
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Picture taken" message:@"Worked dude" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
+}
 
 @end

@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol LDCFoundationCameraFooterViewDelegate <NSObject>
+
+-(void) snapStillImageCaptureButtonTouched;
+
+@end
+
 @interface LDCFoundationCameraFooterView : UIView
+
+@property (nonatomic, retain) id<LDCFoundationCameraFooterViewDelegate> delegate;
 
 @end

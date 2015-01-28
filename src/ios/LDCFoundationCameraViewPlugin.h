@@ -16,7 +16,7 @@
 #import "LDCFoundationCameraView.h"
 #import "LDCFoundationCameraFooterView.h"
 
-@interface LDCFoundationCameraViewPlugin : CDVPlugin
+@interface LDCFoundationCameraViewPlugin : CDVPlugin<LDCFoundationCameraViewDelegate,LDCFoundationCameraFooterViewDelegate>
 
 @property(nonatomic, retain) LDCFoundationCameraView* cameraView;
 @property(nonatomic, retain) LDCFoundationCameraFooterView* footerView;
