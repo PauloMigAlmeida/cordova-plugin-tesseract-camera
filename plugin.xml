@@ -71,6 +71,8 @@ THE SOFTWARE.
 
         <header-file src="src/ios/LDCFoundationCameraView.h" />
         <source-file src="src/ios/LDCFoundationCameraView.m" />
+	<header-file src="src/ios/LDCFoundationCameraFooterView.h" />
+	<source-file src="src/ios/LDCFoundationCameraFooterView.m" />
 	<header-file src="src/ios/LDCTesseractImageRecognizer.h" />
         <source-file src="src/ios/LDCTesseractImageRecognizer.m" />
 	<header-file src="src/ios/LDCTesseractImageRecognizerPlugin.h" />
@@ -78,6 +80,10 @@ THE SOFTWARE.
 	<header-file src="src/ios/LDCFoundationCameraViewPlugin.h" />
 	<source-file src="src/ios/LDCFoundationCameraViewPlugin.m" />
 
+	<!-- Image Assets that need to be compiled alogn with iOS code -->
+	<source-file src="src/ios/assets/btnFotografarNotinha.png" />
+
+	<!-- Linked Framework -->
 	<framework src="AVFoundation.framework" />
 	<framework src="AssetsLibrary.framework" />
 	<framework src="src/ios/libs/TesseractOCR.framework" custom="true" />

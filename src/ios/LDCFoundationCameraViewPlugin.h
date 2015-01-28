@@ -12,12 +12,14 @@
 #import <Cordova/CDV.h>
 #import <Cordova/CDVPlugin.h>
 
-//Local Files
+//Custom componentes
 #import "LDCFoundationCameraView.h"
+#import "LDCFoundationCameraFooterView.h"
 
 @interface LDCFoundationCameraViewPlugin : CDVPlugin
 
 @property(nonatomic, retain) LDCFoundationCameraView* cameraView;
+@property(nonatomic, retain) LDCFoundationCameraFooterView* footerView;
 
 -(void)createCameraView:(CDVInvokedUrlCommand *) command;
 

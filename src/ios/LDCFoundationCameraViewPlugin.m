@@ -34,7 +34,7 @@
         return;
     }
     
-    if (self.cameraView) {
+    if (self.cameraView && self.footerView) {
         return;  //already created, don't need to create it again
     }
     
@@ -45,15 +45,24 @@
     width = [[arguments objectAtIndex:2] floatValue];
     height = [[arguments objectAtIndex:3] floatValue];
 
-    CGRect viewRect = CGRectMake(originx,originy,width,height);
+    CGRect cameraViewRect = CGRectMake(originx,originy,width,height);
+    CGRect cameraFooterRect = CGRectMake(
+                                         originx,
+                                         height - 132,
+                                         width,
+                                         132
+                                         );
     
     //Creating LDCFoundationCameraView instance
-    self.cameraView = [[LDCFoundationCameraView alloc] initWithFrame:viewRect];
+    self.cameraView = [[LDCFoundationCameraView alloc] initWithFrame:cameraViewRect];
     self.cameraView.backgroundColor = [UIColor blackColor];
 
-    //Adding it to webview
+    //Creating LDCFoundationCameraFooterView instance
+    self.footerView = [[LDCFoundationCameraFooterView alloc] initWithFrame:cameraFooterRect];
+
+    //Adding 'em to webview
     [self.webView.superview addSubview:self.cameraView];
-    
+    [self.webView.superview addSubview:self.footerView];
     
     //Initializing AVFoundation
     [self.cameraView initializeCamera];
