@@ -22,7 +22,12 @@
 @property (nonatomic, readonly, getter = isSessionRunningAndDeviceAuthorized) BOOL sessionRunningAndDeviceAuthorized;
 @property (nonatomic) id runtimeErrorHandlingObserver;
 
+//UI compoenents
+@property(nonatomic, retain) LDCFoundationCameraFooterView* footerView;
+
 @end
+
+#define FOOTER_DEFAULT_HEIGHT 132
 
 @implementation LDCFoundationCameraView
 
@@ -94,9 +99,35 @@
         [[self session] startRunning];
     });
     
+    //Add LDCFoundationCameraFooterView
+    CGRect cameraFooterRect = CGRectMake(
+                                         self.frame.origin.x,
+                                         self.frame.size.height - FOOTER_DEFAULT_HEIGHT,
+                                         self.frame.size.width,
+                                         FOOTER_DEFAULT_HEIGHT
+                                         );
+    self.footerView = [[LDCFoundationCameraFooterView alloc] initWithFrame:cameraFooterRect];
+    self.footerView.delegate = self;
+    
+    
     //Adding Corner Markers
-    UIImageView *cornerUpperLeft = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-    cornerUpperLeft.backgroundColor = [UIColor redColor];
+    CGSize defaultCornerSize = CGSizeMake(64, 55);
+    
+    UIImageView *cornerUpperLeft = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, defaultCornerSize.width, defaultCornerSize.height)];
+    cornerUpperLeft.image = [UIImage imageNamed:@"corner_upper_left.png"];
+    cornerUpperLeft.backgroundColor = [UIColor clearColor];
+    
+    UIImageView *cornerUpperRight = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, defaultCornerSize.width, defaultCornerSize.height)];
+    cornerUpperRight.image = [UIImage imageNamed:@"corner_upper_right.png"];
+    cornerUpperRight.backgroundColor = [UIColor clearColor];
+    
+    UIImageView *cornerBottomLeft = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, defaultCornerSize.width, defaultCornerSize.height)];
+    cornerBottomLeft.image = [UIImage imageNamed:@"corner_bottom_left.png"];
+    cornerBottomLeft.backgroundColor = [UIColor clearColor];
+    
+    UIImageView *cornerBottomRight = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, defaultCornerSize.width, defaultCornerSize.height)];
+    cornerUpperLeft.image = [UIImage imageNamed:@"corner_bottom_right.png"];
+    cornerUpperLeft.backgroundColor = [UIColor clearColor];
     
     [self addSubview:cornerUpperLeft];
 }
@@ -237,6 +268,10 @@
     return captureDevice;
 }
 
+#pragma mark - LDCFoundationCameraFooterViewDelegate methods
 
+-(void)snapStillImageCaptureButtonTouched{
+    [self snapStillImage];
+}
 
 @end

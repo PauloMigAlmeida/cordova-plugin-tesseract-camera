@@ -14,13 +14,16 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 
+//Custom Components
+#import "LDCFoundationCameraFooterView.h"
+
 @protocol LDCFoundationCameraViewDelegate <NSObject>
 
 -(void) snapStillImageHasBeenTaken:(UIImage*) image;
 
 @end
 
-@interface LDCFoundationCameraView : UIView
+@interface LDCFoundationCameraView : UIView<LDCFoundationCameraFooterViewDelegate>
 
 @property(nonatomic, retain) id<LDCFoundationCameraViewDelegate> delegate;
 

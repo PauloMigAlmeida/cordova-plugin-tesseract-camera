@@ -12,6 +12,7 @@
 
 @end
 
+
 @implementation LDCFoundationCameraViewPlugin
 
 -(CDVPlugin *)initWithWebView:(UIWebView *)theWebView{
@@ -34,7 +35,7 @@
         return;
     }
     
-    if (self.cameraView && self.footerView) {
+    if (self.cameraView) {
         return;  //already created, don't need to create it again
     }
     
@@ -46,35 +47,18 @@
     height = [[arguments objectAtIndex:3] floatValue];
 
     CGRect cameraViewRect = CGRectMake(originx,originy,width,height);
-    CGRect cameraFooterRect = CGRectMake(
-                                         originx,
-                                         height - 132,
-                                         width,
-                                         132
-                                         );
     
     //Creating LDCFoundationCameraView instance
     self.cameraView = [[LDCFoundationCameraView alloc] initWithFrame:cameraViewRect];
     self.cameraView.backgroundColor = [UIColor blackColor];
     self.cameraView.delegate = self;
 
-    //Creating LDCFoundationCameraFooterView instance
-    self.footerView = [[LDCFoundationCameraFooterView alloc] initWithFrame:cameraFooterRect];
-    self.footerView.delegate = self;
-
-    //Adding 'em to webview
+    //Adding it to webview
     [self.webView.superview addSubview:self.cameraView];
-    [self.webView.superview addSubview:self.footerView];
     
     //Initializing AVFoundation
     [self.cameraView initializeCamera];
     
-}
-
-#pragma mark - LDCFoundationCameraFooterViewDelegate methods
-
--(void)snapStillImageCaptureButtonTouched{
-    [self.cameraView snapStillImage];
 }
 
 #pragma mark - LDCFoundationCameraViewDelegate methods
