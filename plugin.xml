@@ -86,6 +86,7 @@ THE SOFTWARE.
 	<source-file src="src/ios/assets/corner_bottom_right.png" />
 	<source-file src="src/ios/assets/corner_upper_left.png" />
 	<source-file src="src/ios/assets/corner_upper_right.png" />
+	<source-file src="src/ios/assets/btn_close.png" />
 
 	<!-- Linked Framework -->
 	<framework src="AVFoundation.framework" />

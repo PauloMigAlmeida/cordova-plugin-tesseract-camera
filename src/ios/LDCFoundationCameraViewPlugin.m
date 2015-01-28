@@ -52,13 +52,26 @@
     self.cameraView = [[LDCFoundationCameraView alloc] initWithFrame:cameraViewRect];
     self.cameraView.backgroundColor = [UIColor blackColor];
     self.cameraView.delegate = self;
+    
+    //Creating Close Button
+    UIButton *btnClose = [[UIButton alloc] initWithFrame:CGRectMake(0, 20, 44, 44)]; // I`ve chose 44 since it`s the minimum size suggested by Apple
+    [btnClose setImage:[UIImage imageNamed:@"btn_close.png"] forState:UIControlStateNormal];
+    [btnClose addTarget:self action:@selector(btnCloseHandler) forControlEvents:UIControlEventTouchUpInside];
 
-    //Adding it to webview
+    //Adding `em to webview
     [self.webView.superview addSubview:self.cameraView];
+    [self.webView.superview addSubview:btnClose];
     
     //Initializing AVFoundation
     [self.cameraView initializeCamera];
     
+}
+
+#pragma mark - Action methods
+
+-(void) btnCloseHandler
+{
+    NSLog(@"%s",__PRETTY_FUNCTION__);
 }
 
 #pragma mark - LDCFoundationCameraViewDelegate methods
