@@ -28,7 +28,8 @@
 @end
 
 #define FOOTER_DEFAULT_HEIGHT 132
-#define CORNER_MARKER_DEFAULT_HEIGHT_PERC 12.0
+#define CORNER_MARKER_PADDING_START_PERC 5.0
+#define CORNER_MARKER_DEFAULT_HEIGHT_PERC 8.0
 #define CORNER_MARKER_DEFAULT_WIDTH_PERC 8.0
 
 @implementation LDCFoundationCameraView
@@ -119,7 +120,7 @@
     
     UIImageView *cornerUpperLeft = [[UIImageView alloc] initWithFrame:CGRectMake(
                                                                                  (usableArea.size.width * (CORNER_MARKER_DEFAULT_WIDTH_PERC / 100)),
-                                                                                 (usableArea.size.height * (CORNER_MARKER_DEFAULT_HEIGHT_PERC / 100)),
+                                                                                 (usableArea.size.height * (CORNER_MARKER_DEFAULT_HEIGHT_PERC / 100)) + (usableArea.size.height * (CORNER_MARKER_PADDING_START_PERC / 100)),
                                                                                  defaultCornerSize.width,
                                                                                  defaultCornerSize.height
                                                                                  )];
@@ -128,7 +129,7 @@
     
     UIImageView *cornerUpperRight = [[UIImageView alloc] initWithFrame:CGRectMake(
                                                                                   (usableArea.size.width * (1 - (CORNER_MARKER_DEFAULT_WIDTH_PERC / 100))) - defaultCornerSize.width,
-                                                                                  (usableArea.size.height * (CORNER_MARKER_DEFAULT_HEIGHT_PERC / 100)),
+                                                                                  (usableArea.size.height * (CORNER_MARKER_DEFAULT_HEIGHT_PERC / 100)) + (usableArea.size.height * (CORNER_MARKER_PADDING_START_PERC / 100)),
                                                                                   defaultCornerSize.width,
                                                                                   defaultCornerSize.height
                                                                                   )];
