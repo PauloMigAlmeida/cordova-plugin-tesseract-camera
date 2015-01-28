@@ -54,7 +54,7 @@
     self.cameraView.delegate = self;
     
     //Creating Close Button
-    UIButton *btnClose = [[UIButton alloc] initWithFrame:CGRectMake(0, 20, 44, 44)]; // I`ve chose 44 since it`s the minimum size suggested by Apple
+    UIButton *btnClose = [[UIButton alloc] initWithFrame:CGRectMake(0, 20, 56, 56)];
     [btnClose setImage:[UIImage imageNamed:@"btn_close.png"] forState:UIControlStateNormal];
     [btnClose addTarget:self action:@selector(btnCloseHandler) forControlEvents:UIControlEventTouchUpInside];
 
