@@ -82,6 +82,10 @@ THE SOFTWARE.
 
 	<!-- Image Assets that need to be compiled alogn with iOS code -->
 	<source-file src="src/ios/assets/btnFotografarNotinha.png" />
+	<source-file src="src/ios/assets/corner_bottom_left.png" />
+	<source-file src="src/ios/assets/corner_bottom_right.png" />
+	<source-file src="src/ios/assets/corner_upper_left.png" />
+	<source-file src="src/ios/assets/corner_upper_right.png" />
 
 	<!-- Linked Framework -->
 	<framework src="AVFoundation.framework" />

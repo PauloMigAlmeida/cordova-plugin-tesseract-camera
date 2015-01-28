@@ -22,8 +22,6 @@
 @property (nonatomic, readonly, getter = isSessionRunningAndDeviceAuthorized) BOOL sessionRunningAndDeviceAuthorized;
 @property (nonatomic) id runtimeErrorHandlingObserver;
 
-@property (nonatomic,strong) UIImage *imagePhotoTaken;
-
 @end
 
 @implementation LDCFoundationCameraView
@@ -95,6 +93,12 @@
     dispatch_async([self sessionQueue], ^{
         [[self session] startRunning];
     });
+    
+    //Adding Corner Markers
+    UIImageView *cornerUpperLeft = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    cornerUpperLeft.backgroundColor = [UIColor redColor];
+    
+    [self addSubview:cornerUpperLeft];
 }
 
 #pragma mark - AVFoundation methods
@@ -163,26 +167,14 @@
                 NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
                 UIImage *image = [[UIImage alloc] initWithData:imageData];
                 
-                
-                
+                //Saving it CameraRoll
                 [[[ALAssetsLibrary alloc] init] writeImageToSavedPhotosAlbum:[image CGImage] orientation:(ALAssetOrientation)[image imageOrientation] completionBlock:nil];
-                
-                //Setting image to UI
-                //                int newHeight = ceil(image.size.height / image.size.width * 640);
-                //                NSLog(@"Image Width: %d heigth: %d",(int)image.size.width,(int)image.size.height);
-                
-                //                image = [image resizedImage:CGSizeMake(640, newHeight) interpolationQuality:kCGInterpolationDefault];
-                //                NSLog(@"Image Width: %d heigth: %d",(int)image.size.width,(int)image.size.height);
-                //
-                //                image = [image croppedImage:CGRectMake(0, (newHeight - 640) / 4, 640, 640)];
-                //                NSLog(@"Image Width: %d heigth: %d",(int)image.size.width,(int)image.size.height);
-                //
-                _imagePhotoTaken = image;
+            
                 
                 [[self session] stopRunning];
                 
                 if(self.delegate){
-                    [self.delegate snapStillImageHasBeenTaken:_imagePhotoTaken];
+                    [self.delegate snapStillImageHasBeenTaken:image];
                 }
             }
         }];
