@@ -67,7 +67,6 @@
 
     //Initializing AVFoundation
     [self.cameraView initializeCamera];
-
     
     
 }
@@ -82,10 +81,16 @@
 #pragma mark - LDCFoundationCameraViewDelegate methods
 
 -(void)snapStillImageHasBeenTaken:(UIImage *)image{
-    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:self.callbackId];
+
+    //Base64 encoding
+    NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
+    NSString* imageBase64 = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Picture taken" message:@"Worked dude" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
+    //Building plugin result
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:imageBase64];
+    
+    //Sending result to javascript
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
 }
 
 @end
