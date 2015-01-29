@@ -227,7 +227,7 @@
                 UIImage *image = [[UIImage alloc] initWithData:imageData];
                 
                 //Saving it CameraRoll
-                [[[ALAssetsLibrary alloc] init] writeImageToSavedPhotosAlbum:[image CGImage] orientation:(ALAssetOrientation)[image imageOrientation] completionBlock:nil];
+//                [[[ALAssetsLibrary alloc] init] writeImageToSavedPhotosAlbum:[image CGImage] orientation:(ALAssetOrientation)[image imageOrientation] completionBlock:nil];
             
                 
                 [[self session] stopRunning];

@@ -82,6 +82,7 @@
 
 -(void)snapStillImageHasBeenTaken:(UIImage *)image{
 //#ifdef DEBUG
+    NSLog(@"%s cameraView: %@",__PRETTY_FUNCTION__, NSStringFromCGSize(self.cameraView.frame.size));
     NSLog(@"%s image: %@",__PRETTY_FUNCTION__, NSStringFromCGSize(image.size));
 //#endif
     //Base64 encoding
