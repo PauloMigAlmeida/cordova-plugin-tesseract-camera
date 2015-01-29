@@ -13,8 +13,8 @@
 
 @interface LDCTesseractImageRecognizer : NSObject
 
--(void)recognizeText:(UIImage *)image;
+-(void)recognizeText:(UIImage *)image  AndCompletion:(G8RecognitionOperationCallback) completion;
 
--(void)recognizeText:(UIImage *)image AndCharWhitelist:(NSString *)charWhitelist;
+-(void)recognizeText:(UIImage *)image AndCharWhitelist:(NSString *)charWhitelist AndCompletion:(G8RecognitionOperationCallback) completion;
 
 @end

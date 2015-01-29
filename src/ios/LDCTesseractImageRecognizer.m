@@ -25,12 +25,12 @@
     return self;
 }
 
--(void)recognizeText:(UIImage *)image
+-(void)recognizeText:(UIImage *)image  AndCompletion:(G8RecognitionOperationCallback) completion
 {
-    [self recognizeText:image AndCharWhitelist:nil];
+    [self recognizeText:image AndCharWhitelist:nil AndCompletion:completion];
 }
 
--(void)recognizeText:(UIImage *)image AndCharWhitelist:(NSString *)charWhitelist
+-(void)recognizeText:(UIImage *)image AndCharWhitelist:(NSString *)charWhitelist AndCompletion:(G8RecognitionOperationCallback) completion
 {
     
     UIImage *bwImage = image;
@@ -53,22 +53,7 @@
     // perform recognition to a rectangle
     //operation.tesseract.rect = CGRectMake(20, 20, 100, 100);
     
-    operation.recognitionCompleteBlock = ^(G8Tesseract *tesseract) {
-        // Fetch the recognized text
-        NSString *recognizedText = tesseract.recognizedText;
-        
-#ifdef DEBUG
-        NSLog(@"%@", recognizedText);
-#endif
-       
-        // Spawn an alert with the recognized text
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"OCR Result"
-                                                        message:recognizedText
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
-    };
+    operation.recognitionCompleteBlock = completion;
     
     // Finally, add the recognition operation to the queue
     [self.operationQueue addOperation:operation];
