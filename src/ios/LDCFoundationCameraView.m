@@ -24,6 +24,10 @@
 
 //UI compoenents
 @property(nonatomic, retain) LDCFoundationCameraFooterView* footerView;
+@property(nonatomic, retain) UIImageView* cornerUpperLeft;
+@property(nonatomic, retain) UIImageView* cornerUpperRight;
+@property(nonatomic, retain) UIImageView* cornerBottomLeft;
+@property(nonatomic, retain) UIImageView* cornerBottomRight;
 
 @end
 
@@ -118,46 +122,61 @@
     CGRect usableArea = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height - FOOTER_DEFAULT_HEIGHT);
     CGSize defaultCornerSize = CGSizeMake(64, 55);
     
-    UIImageView *cornerUpperLeft = [[UIImageView alloc] initWithFrame:CGRectMake(
+    self.cornerUpperLeft = [[UIImageView alloc] initWithFrame:CGRectMake(
                                                                                  (usableArea.size.width * (CORNER_MARKER_DEFAULT_WIDTH_PERC / 100)),
                                                                                  (usableArea.size.height * (CORNER_MARKER_DEFAULT_HEIGHT_PERC / 100)) + (usableArea.size.height * (CORNER_MARKER_PADDING_START_PERC / 100)),
                                                                                  defaultCornerSize.width,
                                                                                  defaultCornerSize.height
                                                                                  )];
-    cornerUpperLeft.image = [UIImage imageNamed:@"corner_upper_left.png"];
-    cornerUpperLeft.backgroundColor = [UIColor clearColor];
+    self.cornerUpperLeft.image = [UIImage imageNamed:@"corner_upper_left.png"];
+    self.cornerUpperLeft.backgroundColor = [UIColor clearColor];
     
-    UIImageView *cornerUpperRight = [[UIImageView alloc] initWithFrame:CGRectMake(
+    self.cornerUpperRight = [[UIImageView alloc] initWithFrame:CGRectMake(
                                                                                   (usableArea.size.width * (1 - (CORNER_MARKER_DEFAULT_WIDTH_PERC / 100))) - defaultCornerSize.width,
                                                                                   (usableArea.size.height * (CORNER_MARKER_DEFAULT_HEIGHT_PERC / 100)) + (usableArea.size.height * (CORNER_MARKER_PADDING_START_PERC / 100)),
                                                                                   defaultCornerSize.width,
                                                                                   defaultCornerSize.height
                                                                                   )];
-    cornerUpperRight.image = [UIImage imageNamed:@"corner_upper_right.png"];
-    cornerUpperRight.backgroundColor = [UIColor clearColor];
+    self.cornerUpperRight.image = [UIImage imageNamed:@"corner_upper_right.png"];
+    self.cornerUpperRight.backgroundColor = [UIColor clearColor];
     
-    UIImageView *cornerBottomLeft = [[UIImageView alloc] initWithFrame:CGRectMake(
+    self.cornerBottomLeft = [[UIImageView alloc] initWithFrame:CGRectMake(
                                                                                   (usableArea.size.width * (CORNER_MARKER_DEFAULT_WIDTH_PERC / 100)),
                                                                                   (usableArea.size.height * (1 - (CORNER_MARKER_DEFAULT_HEIGHT_PERC / 100))) - defaultCornerSize.height,
                                                                                   defaultCornerSize.width,
                                                                                   defaultCornerSize.height
                                                                                   )];
-    cornerBottomLeft.image = [UIImage imageNamed:@"corner_bottom_left.png"];
-    cornerBottomLeft.backgroundColor = [UIColor clearColor];
+    self.cornerBottomLeft.image = [UIImage imageNamed:@"corner_bottom_left.png"];
+    self.cornerBottomLeft.backgroundColor = [UIColor clearColor];
     
-    UIImageView *cornerBottomRight = [[UIImageView alloc] initWithFrame:CGRectMake(
+    self.cornerBottomRight = [[UIImageView alloc] initWithFrame:CGRectMake(
                                                                                    (usableArea.size.width * (1 - (CORNER_MARKER_DEFAULT_WIDTH_PERC / 100))) - defaultCornerSize.width,
                                                                                    (usableArea.size.height * (1 - (CORNER_MARKER_DEFAULT_HEIGHT_PERC / 100))) - defaultCornerSize.height,
                                                                                    defaultCornerSize.width,
                                                                                    defaultCornerSize.height
                                                                                    )];
-    cornerBottomRight.image = [UIImage imageNamed:@"corner_bottom_right.png"];
-    cornerBottomRight.backgroundColor = [UIColor clearColor];
+    self.cornerBottomRight.image = [UIImage imageNamed:@"corner_bottom_right.png"];
+    self.cornerBottomRight.backgroundColor = [UIColor clearColor];
     
-    [self addSubview:cornerUpperLeft];
-    [self addSubview:cornerUpperRight];
-    [self addSubview:cornerBottomLeft];
-    [self addSubview:cornerBottomRight];
+    [self addSubview:self.cornerUpperLeft];
+    [self addSubview:self.cornerUpperRight];
+    [self addSubview:self.cornerBottomLeft];
+    [self addSubview:self.cornerBottomRight];
+}
+
+-(UIImage*) cropImageWithinBounds:(UIImage*) image{
+    CGFloat factor = image.size.width / self.frame.size.width;
+    
+    CGFloat x_crop = self.cornerUpperLeft.frame.origin.x / factor;
+    CGFloat y_crop = self.cornerUpperLeft.frame.origin.y / factor;
+    CGFloat width_crop = (self.cornerUpperRight.frame.origin.x + self.cornerUpperRight.frame.size.width) / factor;
+    CGFloat height_crop = (self.cornerBottomLeft.frame.origin.y + self.cornerUpperRight.frame.size.height) / factor;
+    
+    CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], CGRectMake(x_crop, y_crop, width_crop, height_crop));
+    UIImage *croppedImage = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+    
+    return croppedImage;
 }
 
 #pragma mark - AVFoundation methods
@@ -230,6 +249,9 @@
 //                [[[ALAssetsLibrary alloc] init] writeImageToSavedPhotosAlbum:[image CGImage] orientation:(ALAssetOrientation)[image imageOrientation] completionBlock:nil];
             
                 
+                //Crop image within corner bounds
+                image = [self cropImageWithinBounds:image];
+                
                 [[self session] stopRunning];
                 
                 if(self.delegate){
@@ -301,5 +323,6 @@
 -(void)snapStillImageCaptureButtonTouched{
     [self snapStillImage];
 }
+
 
 @end
