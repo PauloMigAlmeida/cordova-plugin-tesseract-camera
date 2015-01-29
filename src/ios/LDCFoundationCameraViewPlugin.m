@@ -81,6 +81,7 @@
 #pragma mark - LDCFoundationCameraViewDelegate methods
 
 -(void)snapStillImageHasBeenTaken:(UIImage *)image{
+    
     //Base64 encoding
     NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
     NSString* imageBase64 = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];

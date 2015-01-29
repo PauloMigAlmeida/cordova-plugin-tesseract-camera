@@ -165,19 +165,67 @@
 }
 
 -(UIImage*) cropImageWithinBounds:(UIImage*) image{
-    CGFloat factor = image.size.width / self.frame.size.width;
+    CGFloat factor = self.frame.size.width / image.size.width;
     
-    CGFloat x_crop = self.cornerUpperLeft.frame.origin.x / factor;
-    CGFloat y_crop = self.cornerUpperLeft.frame.origin.y / factor;
-    CGFloat width_crop = (self.cornerUpperRight.frame.origin.x + self.cornerUpperRight.frame.size.width) / factor;
-    CGFloat height_crop = (self.cornerBottomLeft.frame.origin.y + self.cornerUpperRight.frame.size.height) / factor;
+    NSLog(@"%s self.cornerUpperLeft: %@",__PRETTY_FUNCTION__, NSStringFromCGRect(self.cornerUpperLeft.frame));
+    CGFloat x_crop = self.cornerUpperLeft.frame.origin.x / factor ;
+    CGFloat y_crop = self.cornerUpperLeft.frame.origin.y  / factor;
+    CGFloat width_crop = (self.cornerUpperRight.frame.origin.x + self.cornerUpperRight.frame.size.width)  / factor;
+    CGFloat height_crop = (self.cornerBottomLeft.frame.origin.y + self.cornerBottomLeft.frame.size.height)  / factor;
     
     CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], CGRectMake(x_crop, y_crop, width_crop, height_crop));
-    UIImage *croppedImage = [UIImage imageWithCGImage:imageRef];
+    UIImage *croppedImage = [UIImage imageWithCGImage:imageRef scale:image.scale orientation:image.imageOrientation];
     CGImageRelease(imageRef);
+
+    croppedImage = [self rotateImageUp:croppedImage];
+    NSLog(@"croppedImage %d", croppedImage.imageOrientation == UIImageOrientationUp);
     
-    return croppedImage;
+    //Saving it CameraRoll
+    [[[ALAssetsLibrary alloc] init] writeImageToSavedPhotosAlbum:[croppedImage CGImage] orientation:(ALAssetOrientation)[croppedImage imageOrientation] completionBlock:nil];
+    
+    return [croppedImage g8_grayScale];
 }
+
+static inline double radians (double degrees) {return degrees * M_PI/180;}
+
+- (UIImage *)rotateImageUp:(UIImage*)src
+{
+    /**
+        Method taken from SO 1315251 and 5983090. Thanks guys
+     */
+    double radian = 0;
+    
+    if (src.imageOrientation == UIImageOrientationRight) {
+        radian = radians(90);
+    } else if (src.imageOrientation == UIImageOrientationLeft) {
+        radian = radians(-90);
+    }
+    
+    // calculate the size of the rotated view's containing box for our drawing space
+    UIView *rotatedViewBox = [[UIView alloc] initWithFrame:CGRectMake(0,0, src.size.width, src.size.height)];
+    CGAffineTransform t = CGAffineTransformMakeRotation(radian);
+    rotatedViewBox.transform = t;
+    CGSize rotatedSize = rotatedViewBox.frame.size;
+    
+    // Create the bitmap context
+    UIGraphicsBeginImageContext(rotatedSize);
+    CGContextRef bitmap = UIGraphicsGetCurrentContext();
+    
+    // Move the origin to the middle of the image so we will rotate and scale around the center.
+    CGContextTranslateCTM(bitmap, rotatedSize.width/2, rotatedSize.height/2);
+    
+    //   // Rotate the image context
+    CGContextRotateCTM(bitmap, radian);
+    
+    // Now, draw the rotated/scaled image into the context
+    CGContextScaleCTM(bitmap, 1.0, -1.0);
+    CGContextDrawImage(bitmap, CGRectMake(-src.size.width / 2, -src.size.height / 2, src.size.width, src.size.height), [src CGImage]);
+    
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
 
 #pragma mark - AVFoundation methods
 - (void)checkDeviceAuthorizationStatus

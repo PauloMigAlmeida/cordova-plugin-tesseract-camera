@@ -15,20 +15,19 @@
     NSString* imageData = (NSString*)[command.arguments objectAtIndex:0];
     NSString* charWhiteList = (NSString*)[command.arguments objectAtIndex:1 withDefault:nil];
     
-    __weak typeof(self) weakSelf = self;
     
     [self.commandDelegate runInBackground:^{
         
         LDCTesseractImageRecognizer* tesseract = [[LDCTesseractImageRecognizer alloc] init];
         
-        UIImage* imageToBeRecognized = [weakSelf imageFromBase64String:imageData];
+        UIImage* imageToBeRecognized = [self imageFromBase64String:imageData];
         
         NSLog(@"%s imageToBeRecognized: %@",__PRETTY_FUNCTION__, NSStringFromCGSize(imageToBeRecognized.size));
         
         [tesseract recognizeText:imageToBeRecognized AndCharWhitelist:charWhiteList];
         
         CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"OK"];
-        [weakSelf.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }];
     
 }

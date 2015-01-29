@@ -17,6 +17,9 @@
 //Custom Components
 #import "LDCFoundationCameraFooterView.h"
 
+//Categories
+#import <TesseractOCR/UIImage+G8Filters.h>
+
 @protocol LDCFoundationCameraViewDelegate <NSObject>
 
 -(void) snapStillImageHasBeenTaken:(UIImage*) image;
