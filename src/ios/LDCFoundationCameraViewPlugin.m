@@ -22,7 +22,7 @@
     return self;
 }
 
--(void)createCameraView:(CDVInvokedUrlCommand *) command
+-(void)takePicture:(CDVInvokedUrlCommand *) command
 {
     /**
         Method largely based on devgeeks example of how to add a native view from a cordova plugin.

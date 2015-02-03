@@ -21,6 +21,6 @@
 @property(nonatomic, retain) LDCFoundationCameraView* cameraView;
 
 
--(void)createCameraView:(CDVInvokedUrlCommand *) command;
+-(void)takePicture:(CDVInvokedUrlCommand *) command;
 
 @end
