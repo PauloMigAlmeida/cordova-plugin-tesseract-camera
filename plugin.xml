@@ -79,6 +79,8 @@ THE SOFTWARE.
         <source-file src="src/ios/LDCTesseractImageRecognizerPlugin.m" />
 	<header-file src="src/ios/LDCFoundationCameraViewPlugin.h" />
 	<source-file src="src/ios/LDCFoundationCameraViewPlugin.m" />
+	<header-file src="src/ios/UIImage+Rotate.h" />
+	<source-file src="src/ios/UIImage+Rotate.m" />
 
 	<!-- Image Assets that need to be compiled alogn with iOS code -->
 	<source-file src="src/ios/assets/btnFotografarNotinha.png" />

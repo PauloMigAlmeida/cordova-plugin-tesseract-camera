@@ -165,66 +165,47 @@
 }
 
 -(UIImage*) cropImageWithinBounds:(UIImage*) image{
-    CGFloat factor = self.frame.size.width / image.size.width;
+    CGSize usableArea = CGSizeMake(
+                                   image.size.width,
+                                   ((self.frame.size.height - FOOTER_DEFAULT_HEIGHT) / self.frame.size.height) * image.size.height
+                       );
     
-    NSLog(@"%s self.cornerUpperLeft: %@",__PRETTY_FUNCTION__, NSStringFromCGRect(self.cornerUpperLeft.frame));
-    CGFloat x_crop = self.cornerUpperLeft.frame.origin.x / factor ;
-    CGFloat y_crop = self.cornerUpperLeft.frame.origin.y  / factor;
-    CGFloat width_crop = (self.cornerUpperRight.frame.origin.x + self.cornerUpperRight.frame.size.width)  / factor;
-    CGFloat height_crop = (self.cornerBottomLeft.frame.origin.y + self.cornerBottomLeft.frame.size.height)  / factor;
+    CGFloat x_crop = usableArea.width - (usableArea.width * (1.0 - (CORNER_MARKER_DEFAULT_WIDTH_PERC / 100))) ;
+    CGFloat y_crop = usableArea.height - (usableArea.height * ( 1.0 - ((CORNER_MARKER_DEFAULT_HEIGHT_PERC + CORNER_MARKER_PADDING_START_PERC) / 100 )));
+    CGFloat width_crop = (usableArea.width * (1.0 - (CORNER_MARKER_DEFAULT_WIDTH_PERC * 2 / 100)));
+    CGFloat height_crop = usableArea.height *  (1.0 - (CORNER_MARKER_DEFAULT_WIDTH_PERC * 2 / 100 ));
     
-    CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], CGRectMake(x_crop, y_crop, width_crop, height_crop));
-    UIImage *croppedImage = [UIImage imageWithCGImage:imageRef scale:image.scale orientation:image.imageOrientation];
+    CGAffineTransform rectTransform;
+    switch (image.imageOrientation) {
+        case UIImageOrientationLeft:
+            rectTransform = CGAffineTransformTranslate(CGAffineTransformMakeRotation(radians(90)), 0, -image.size.height);
+            break;
+        case UIImageOrientationRight:
+            rectTransform = CGAffineTransformTranslate(CGAffineTransformMakeRotation(radians(-90)), -image.size.width, 0);
+            break;
+        case UIImageOrientationDown:
+            rectTransform = CGAffineTransformTranslate(CGAffineTransformMakeRotation(radians(-180)), -image.size.width, -image.size.height);
+            break;
+        default:
+            rectTransform = CGAffineTransformIdentity;
+    };
+    rectTransform = CGAffineTransformScale(rectTransform, image.scale, image.scale);
+    
+    CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], CGRectApplyAffineTransform(CGRectMake(x_crop, y_crop, width_crop, height_crop), rectTransform));
+    UIImage *croppedImage = [UIImage imageWithCGImage:imageRef scale:image.scale orientation:UIImageOrientationUp];
     CGImageRelease(imageRef);
-
-    croppedImage = [self rotateImageUp:croppedImage];
-    NSLog(@"croppedImage %d", croppedImage.imageOrientation == UIImageOrientationUp);
     
+    UIImage *newCroppedImage = [[croppedImage rotate:UIImageOrientationRight] g8_grayScale];
+        
     //Saving it CameraRoll
-    [[[ALAssetsLibrary alloc] init] writeImageToSavedPhotosAlbum:[croppedImage CGImage] orientation:(ALAssetOrientation)[croppedImage imageOrientation] completionBlock:nil];
+    [[[ALAssetsLibrary alloc] init] writeImageToSavedPhotosAlbum:[image CGImage] orientation:(ALAssetOrientation)[image imageOrientation] completionBlock:nil];
+//    [[[ALAssetsLibrary alloc] init] writeImageToSavedPhotosAlbum:[newCroppedImage CGImage] orientation:(ALAssetOrientation)[newCroppedImage imageOrientation] completionBlock:nil];
     
-    return [croppedImage g8_grayScale];
+    return newCroppedImage;
 }
 
 static inline double radians (double degrees) {return degrees * M_PI/180;}
 
-- (UIImage *)rotateImageUp:(UIImage*)src
-{
-    /**
-        Method taken from SO 1315251 and 5983090. Thanks guys
-     */
-    double radian = 0;
-    
-    if (src.imageOrientation == UIImageOrientationRight) {
-        radian = radians(90);
-    } else if (src.imageOrientation == UIImageOrientationLeft) {
-        radian = radians(-90);
-    }
-    
-    // calculate the size of the rotated view's containing box for our drawing space
-    UIView *rotatedViewBox = [[UIView alloc] initWithFrame:CGRectMake(0,0, src.size.width, src.size.height)];
-    CGAffineTransform t = CGAffineTransformMakeRotation(radian);
-    rotatedViewBox.transform = t;
-    CGSize rotatedSize = rotatedViewBox.frame.size;
-    
-    // Create the bitmap context
-    UIGraphicsBeginImageContext(rotatedSize);
-    CGContextRef bitmap = UIGraphicsGetCurrentContext();
-    
-    // Move the origin to the middle of the image so we will rotate and scale around the center.
-    CGContextTranslateCTM(bitmap, rotatedSize.width/2, rotatedSize.height/2);
-    
-    //   // Rotate the image context
-    CGContextRotateCTM(bitmap, radian);
-    
-    // Now, draw the rotated/scaled image into the context
-    CGContextScaleCTM(bitmap, 1.0, -1.0);
-    CGContextDrawImage(bitmap, CGRectMake(-src.size.width / 2, -src.size.height / 2, src.size.width, src.size.height), [src CGImage]);
-    
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
-}
 
 
 #pragma mark - AVFoundation methods
@@ -266,9 +247,9 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 
 -(void) setPresetResolution
 {
-    if([self.session canSetSessionPreset:AVCaptureSessionPresetiFrame1280x720])
+    if([self.session canSetSessionPreset:AVCaptureSessionPreset1280x720])
     {
-        self.session.sessionPreset = AVCaptureSessionPresetiFrame1280x720;
+        self.session.sessionPreset = AVCaptureSessionPreset1280x720;
     }
     else
     {

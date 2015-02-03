@@ -19,6 +19,7 @@
 
 //Categories
 #import <TesseractOCR/UIImage+G8Filters.h>
+#import "UIImage+Rotate.h"
 
 @protocol LDCFoundationCameraViewDelegate <NSObject>
 
