@@ -89,6 +89,12 @@ THE SOFTWARE.
 	<!-- Image Crop Plugin -->
 	<header-file src="src/ios/LDCFXBlurView.h" />
 	<source-file src="src/ios/LDCFXBlurView.m" />
+	<header-file src="src/ios/LDCImageCropControlPointView.h" />
+	<source-file src="src/ios/LDCImageCropControlPointView.m" />
+	<header-file src="src/ios/LDCImageCropImageCropView.h" />
+	<source-file src="src/ios/LDCImageCropImageCropView.m" />
+	<header-file src="src/ios/LDCImageCropShadeView.h" />
+	<source-file src="src/ios/LDCImageCropShadeView.m" />
 	<header-file src="src/ios/LDCImageCropViewController.h" />
 	<source-file src="src/ios/LDCImageCropViewController.m" />
 	<header-file src="src/ios/LDCImageCropPlugin.h" />

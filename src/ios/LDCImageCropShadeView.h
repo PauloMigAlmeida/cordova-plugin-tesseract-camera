@@ -1,15 +1,16 @@
 //
-//  LDCImageCropViewController.m
+//  LDCImageCropShadeView.h
 //
 //  Version 0.0.1
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Paulo Miguel Almeida Rodenas <paulo.ubuntu@gmail.com>
+//  Original work Copyright (c) 2014 Ming Yang <myang.git @t gmail.com>
+//  Modified work Copyright (c) 2014 Paulo Miguel Almeida Rodenas <paulo.ubuntu@gmail.com>
 //
 //  Get the latest version from here:
 //
-//  https://github.com/pauloubuntu/cordova-plugin-tesseract-camera
+//  https://github.com/myang-git/iOS-Image-Crop-View
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -30,20 +31,17 @@
 //  THE SOFTWARE.
 //
 
-#import "LDCImageCropPlugin.h"
+#import <UIKit/UIKit.h>
 
-@implementation LDCImageCropPlugin
-
--(void)cropImage:(CDVInvokedUrlCommand *)command
-{
-    NSString* imageData = (NSString*)[command.arguments objectAtIndex:0];
-    
-    //Base64 decoding
-    UIImage* image = [imageData imageFromBase64String];
-        
-    //Open ViewController
-    LDCImageCropViewController* vc = [[LDCImageCropViewController alloc] initWithImage:image];
-    [self.viewController presentViewController:vc animated:YES completion:nil];
+@interface LDCImageCropShadeView : UIView{
+    CGFloat cropBorderRed, cropBorderGreen, cropBorderBlue, cropBorderAlpha;
+    CGRect cropArea;
+    CGFloat shadeAlpha;
 }
+
+@property (nonatomic, retain) UIColor* cropBorderColor;
+@property (nonatomic) CGRect cropArea;
+@property (nonatomic) CGFloat shadeAlpha;
+@property (nonatomic, strong) UIImageView *blurredImageView;
 
 @end

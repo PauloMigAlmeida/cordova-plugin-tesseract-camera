@@ -1,15 +1,16 @@
 //
-//  LDCImageCropViewController.m
+//  LDCImageCropControlPointView.m
 //
 //  Version 0.0.1
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2015 Paulo Miguel Almeida Rodenas <paulo.ubuntu@gmail.com>
+//  Original work Copyright (c) 2014 Ming Yang <myang.git @t gmail.com>
+//  Modified work Copyright (c) 2014 Paulo Miguel Almeida Rodenas <paulo.ubuntu@gmail.com>
 //
 //  Get the latest version from here:
 //
-//  https://github.com/pauloubuntu/cordova-plugin-tesseract-camera
+//  https://github.com/myang-git/iOS-Image-Crop-View
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -30,20 +31,35 @@
 //  THE SOFTWARE.
 //
 
-#import "LDCImageCropPlugin.h"
+#import "LDCImageCropControlPointView.h"
 
-@implementation LDCImageCropPlugin
+@implementation LDCImageCropControlPointView
 
--(void)cropImage:(CDVInvokedUrlCommand *)command
+- (id)initWithFrame:(CGRect)frame
 {
-    NSString* imageData = (NSString*)[command.arguments objectAtIndex:0];
-    
-    //Base64 decoding
-    UIImage* image = [imageData imageFromBase64String];
-        
-    //Open ViewController
-    LDCImageCropViewController* vc = [[LDCImageCropViewController alloc] initWithImage:image];
-    [self.viewController presentViewController:vc animated:YES completion:nil];
+    self = [super initWithFrame:frame];
+    if (self) {
+        // Initialization code
+        self.color = [UIColor colorWithRed:18.0/255.0 green:173.0/255.0 blue:251.0/255.0 alpha:1];
+        self.opaque = NO;
+    }
+    return self;
+}
+
+- (void)setColor:(UIColor *)_color {
+    [_color getRed:&red green:&green blue:&blue alpha:&alpha];
+    [self setNeedsDisplay];
+}
+
+- (UIColor*)color {
+    return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
+}
+
+- (void)drawRect:(CGRect)rect {
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextClearRect(context, rect);
+    CGContextSetRGBFillColor(context, red, green, blue, alpha);
+    CGContextFillEllipseInRect(context, rect);
 }
 
 @end
