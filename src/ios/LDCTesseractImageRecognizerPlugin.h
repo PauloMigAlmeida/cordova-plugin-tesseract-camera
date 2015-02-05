@@ -15,6 +15,9 @@
 //Local Files
 #import "LDCTesseractImageRecognizer.h"
 
+//Categories
+#import "NSString+Base64.h"
+
 @interface LDCTesseractImageRecognizerPlugin : CDVPlugin
 
 -(void) recognizeImage:(CDVInvokedUrlCommand*) command;

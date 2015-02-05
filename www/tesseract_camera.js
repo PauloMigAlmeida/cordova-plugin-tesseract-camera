@@ -4,6 +4,10 @@ exports.recognize = function (imageData, charWhiteList, callbackSuccess, callbac
     exec(callbackSuccess, callbackFailure, 'CordovaTesseractImageRecognizer', 'recognizeImage', [imageData, charWhiteList]);
 };
 
-exports.takePicture = function (originX, originY, width, height, callbackSuccess, callbackFailure){
-    exec(callbackSuccess, callbackFailure, 'CordovaTesseractCamera', 'takePicture', [originX, originY, width, height]);
+exports.takePicture = function (callbackSuccess, callbackFailure){
+    exec(callbackSuccess, callbackFailure, 'CordovaTesseractCamera', 'takePicture', []);
+};
+
+exports.cropImage = function (imageData,callbackSuccess, callbackFailure){
+    exec(callbackSuccess, callbackFailure, 'CordovaTesseractImageCrop', 'cropImage', [imageData]);
 };

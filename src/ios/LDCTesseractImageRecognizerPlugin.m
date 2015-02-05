@@ -21,7 +21,7 @@
         
         LDCTesseractImageRecognizer* tesseract = [[LDCTesseractImageRecognizer alloc] init];
         
-        UIImage* imageToBeRecognized = [weakSelf imageFromBase64String:imageData];
+        UIImage* imageToBeRecognized = [imageData imageFromBase64String];
         
         [tesseract recognizeText:imageToBeRecognized AndCharWhitelist:charWhiteList AndCompletion:^(G8Tesseract *tesseract) {
             

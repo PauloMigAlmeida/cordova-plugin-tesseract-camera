@@ -67,6 +67,9 @@ THE SOFTWARE.
 	    <feature name="CordovaTesseractCamera">
 		<param name="ios-package" value="LDCTakePicturePlugin" />
 	    </feature>
+	    <feature name="CordovaTesseractImageCrop">
+		<param name="ios-package" value="LDCImageCropPlugin" />
+	    </feature>
         </config-file>
 
 	<!-- Take Picture Plugin -->
@@ -83,9 +86,20 @@ THE SOFTWARE.
         <source-file src="src/ios/LDCTesseractImageRecognizer.m" />
 	<header-file src="src/ios/LDCTesseractImageRecognizerPlugin.h" />
         <source-file src="src/ios/LDCTesseractImageRecognizerPlugin.m" />
+	<!-- Image Crop Plugin -->
+	<header-file src="src/ios/LDCFXBlurView.h" />
+	<source-file src="src/ios/LDCFXBlurView.m" />
+	<header-file src="src/ios/LDCImageCropViewController.h" />
+	<source-file src="src/ios/LDCImageCropViewController.m" />
+	<header-file src="src/ios/LDCImageCropPlugin.h" />
+	<source-file src="src/ios/LDCImageCropPlugin.m" />
 	<!-- Categories -->
 	<header-file src="src/ios/UIImage+Rotate.h" />
 	<source-file src="src/ios/UIImage+Rotate.m" />
+	<header-file src="src/ios/UIImage+Base64.h" />
+	<source-file src="src/ios/UIImage+Base64.m" />
+	<header-file src="src/ios/NSString+Base64.h" />
+	<source-file src="src/ios/NSString+Base64.m" />
 
 	<!-- Image Assets that need to be compiled alogn with iOS code -->
 	<source-file src="src/ios/assets/btnFotografarNotinha.png" />
@@ -98,6 +112,8 @@ THE SOFTWARE.
 	<!-- Linked Framework -->
 	<framework src="AVFoundation.framework" />
 	<framework src="AssetsLibrary.framework" />
+	<framework src="QuartzCore.framework" />
+	<framework src="Accelerate.framework" />
 	<framework src="src/ios/libs/TesseractOCR.framework" custom="true" />
     	<framework src="libstdc++.6.0.9.dylib" />
 	<framework src="CoreImage.framework" />

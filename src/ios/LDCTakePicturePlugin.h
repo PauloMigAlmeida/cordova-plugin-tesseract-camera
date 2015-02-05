@@ -15,6 +15,8 @@
 //Custom components
 #import "LDCTakePictureViewController.h"
 
+//Categories
+#import "UIImage+Base64.h"
 
 @interface LDCTakePicturePlugin : CDVPlugin<LDCTakePictureViewControllerDelegate>
 

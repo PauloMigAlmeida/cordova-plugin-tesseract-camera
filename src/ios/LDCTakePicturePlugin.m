@@ -15,7 +15,6 @@
 
 @end
 
-
 @implementation LDCTakePicturePlugin
 
 -(void)takePicture:(CDVInvokedUrlCommand *) command
@@ -34,8 +33,7 @@
 -(void)snapStillImageHasBeenTaken:(UIImage *)image{
     
     //Base64 encoding
-    NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
-    NSString* imageBase64 = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    NSString* imageBase64 = [image base64StringFromImage];
     
     //Building plugin result
     CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:imageBase64];
