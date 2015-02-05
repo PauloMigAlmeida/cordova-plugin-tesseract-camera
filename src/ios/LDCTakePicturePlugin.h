@@ -1,5 +1,5 @@
 //
-//  LDCFoundationCameraViewPlugin.h
+//  LDCTakePicturePlugin.h 
 //  InstaGraacCamera2
 //
 //  Created by Paulo Miguel Almeida on 1/27/15.
@@ -16,7 +16,7 @@
 #import "LDCTakePictureViewController.h"
 
 
-@interface LDCFoundationCameraViewPlugin : CDVPlugin<LDCTakePictureViewControllerDelegate>
+@interface LDCTakePicturePlugin : CDVPlugin<LDCTakePictureViewControllerDelegate>
 
 
 -(void)takePicture:(CDVInvokedUrlCommand *) command;

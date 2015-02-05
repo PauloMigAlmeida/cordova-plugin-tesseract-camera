@@ -1,14 +1,14 @@
 //
-//  LDCFoundationCameraViewPlugin.m
+//  LDCTakePicturePlugin.m
 //  InstaGraacCamera2
 //
 //  Created by Paulo Miguel Almeida on 1/27/15.
 //  Copyright (c) 2015 Loducca Publicidade. All rights reserved.
 //
 
-#import "LDCFoundationCameraViewPlugin.h"
+#import "LDCTakePicturePlugin.h"
 
-@interface LDCFoundationCameraViewPlugin()
+@interface LDCTakePicturePlugin()
 
 @property(strong,nonatomic) NSString* callbackId;
 @property(strong,nonatomic) LDCTakePictureViewController* takePictureViewController;
@@ -16,7 +16,7 @@
 @end
 
 
-@implementation LDCFoundationCameraViewPlugin
+@implementation LDCTakePicturePlugin
 
 -(CDVPlugin *)initWithWebView:(UIWebView *)theWebView{
     self = (LDCFoundationCameraViewPlugin*)[super initWithWebView:theWebView];
@@ -34,7 +34,7 @@
     
 }
 
-#pragma mark - LDCFoundationCameraViewDelegate methods
+#pragma mark - LDCTakePictureViewControllerDelegate methods
 
 -(void)snapStillImageHasBeenTaken:(UIImage *)image{
     

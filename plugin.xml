@@ -65,7 +65,7 @@ THE SOFTWARE.
                 <param name="ios-package" value="LDCTesseractImageRecognizerPlugin"/>
 	    </feature>
 	    <feature name="CordovaTesseractCamera">
-		<param name="ios-package" value="LDCFoundationCameraViewPlugin" />
+		<param name="ios-package" value="LDCTakePicturePlugin" />
 	    </feature>
         </config-file>
 
@@ -76,8 +76,8 @@ THE SOFTWARE.
 	<source-file src="src/ios/LDCFoundationCameraFooterView.m" />
 	<header-file src="src/ios/LDCTakePictureViewController.h" />
 	<source-file src="src/ios/LDCTakePictureViewController.m" />
-	<header-file src="src/ios/LDCFoundationCameraViewPlugin.h" />
-	<source-file src="src/ios/LDCFoundationCameraViewPlugin.m" />
+	<header-file src="src/ios/LDCTakePicturePlugin.h" />
+	<source-file src="src/ios/LDCTakePicturePlugin.m" />
 	<!-- Tesseract Recognizer Plugin -->
 	<header-file src="src/ios/LDCTesseractImageRecognizer.h" />
         <source-file src="src/ios/LDCTesseractImageRecognizer.m" />
