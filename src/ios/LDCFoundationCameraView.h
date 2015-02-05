@@ -9,29 +9,10 @@
 #import <UIKit/UIKit.h>
 
 //Libraries
-#import <Cordova/CDV.h>
-#import <Cordova/CDVPlugin.h>
 #import <AVFoundation/AVFoundation.h>
-#import <AssetsLibrary/AssetsLibrary.h>
 
-//Custom Components
-#import "LDCFoundationCameraFooterView.h"
+@interface LDCFoundationCameraView : UIView
 
-//Categories
-#import <TesseractOCR/UIImage+G8Filters.h>
-#import "UIImage+Rotate.h"
-
-@protocol LDCFoundationCameraViewDelegate <NSObject>
-
--(void) snapStillImageHasBeenTaken:(UIImage*) image;
-
-@end
-
-@interface LDCFoundationCameraView : UIView<LDCFoundationCameraFooterViewDelegate>
-
-@property(nonatomic, retain) id<LDCFoundationCameraViewDelegate> delegate;
-
--(void) initializeCamera;
--(void) snapStillImage;
+@property (nonatomic) AVCaptureSession *session;
 
 @end

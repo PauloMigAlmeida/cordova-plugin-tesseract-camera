@@ -25,7 +25,7 @@ THE SOFTWARE.
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
-        id="br.com.loducca.instagraacc.cordova.plugin.camera"
+        id="com.github.pauloubuntu.cordova-plugin-tesseract-camera"
         version="0.0.1">
 
     <name>Cordova Plugin Tesseract Camera</name>
@@ -69,16 +69,21 @@ THE SOFTWARE.
 	    </feature>
         </config-file>
 
+	<!-- Take Picture Plugin -->
         <header-file src="src/ios/LDCFoundationCameraView.h" />
         <source-file src="src/ios/LDCFoundationCameraView.m" />
 	<header-file src="src/ios/LDCFoundationCameraFooterView.h" />
 	<source-file src="src/ios/LDCFoundationCameraFooterView.m" />
+	<header-file src="src/ios/LDCTakePictureViewController.h" />
+	<source-file src="src/ios/LDCTakePictureViewController.m" />
+	<header-file src="src/ios/LDCFoundationCameraViewPlugin.h" />
+	<source-file src="src/ios/LDCFoundationCameraViewPlugin.m" />
+	<!-- Tesseract Recognizer Plugin -->
 	<header-file src="src/ios/LDCTesseractImageRecognizer.h" />
         <source-file src="src/ios/LDCTesseractImageRecognizer.m" />
 	<header-file src="src/ios/LDCTesseractImageRecognizerPlugin.h" />
         <source-file src="src/ios/LDCTesseractImageRecognizerPlugin.m" />
-	<header-file src="src/ios/LDCFoundationCameraViewPlugin.h" />
-	<source-file src="src/ios/LDCFoundationCameraViewPlugin.m" />
+	<!-- Categories -->
 	<header-file src="src/ios/UIImage+Rotate.h" />
 	<source-file src="src/ios/UIImage+Rotate.m" />
 

@@ -11,6 +11,7 @@
 @interface LDCFoundationCameraViewPlugin()
 
 @property(strong,nonatomic) NSString* callbackId;
+@property(strong,nonatomic) LDCTakePictureViewController* takePictureViewController;
 
 @end
 
@@ -24,58 +25,13 @@
 
 -(void)takePicture:(CDVInvokedUrlCommand *) command
 {
-    /**
-        Method largely based on devgeeks example of how to add a native view from a cordova plugin.
-        https://github.com/devgeeks/VolumeSlider
-     */
+
     self.callbackId = command.callbackId;
-    NSArray* arguments = [command arguments];
     
-    NSUInteger argc = [arguments count];
+    self.takePictureViewController = [[LDCTakePictureViewController alloc]init];
+    self.takePictureViewController.delegate = self;
+    [self.viewController presentViewController:self.takePictureViewController animated:YES completion:nil];
     
-    if (argc < 4) { // at a minimum we need x origin, y origin and width...
-        return;
-    }
-    
-    if (self.cameraView) {
-        return;  //already created, don't need to create it again
-    }
-    
-    CGFloat originx,originy,width,height;
-    
-    originx = [[arguments objectAtIndex:0] floatValue];
-    originy = [[arguments objectAtIndex:1] floatValue];
-    width = [[arguments objectAtIndex:2] floatValue];
-    height = [[arguments objectAtIndex:3] floatValue];
-
-    CGRect cameraViewRect = CGRectMake(originx,originy,width,height);
-    
-
-    //Creating LDCFoundationCameraView instance
-    self.cameraView = [[LDCFoundationCameraView alloc] initWithFrame:cameraViewRect];
-    self.cameraView.backgroundColor = [UIColor blackColor];
-    self.cameraView.delegate = self;
-    
-    //Creating Close Button
-    UIButton *btnClose = [[UIButton alloc] initWithFrame:CGRectMake(0, 10, 56, 56)];
-    [btnClose setImage:[UIImage imageNamed:@"btn_close.png"] forState:UIControlStateNormal];
-    [btnClose addTarget:self action:@selector(btnCloseHandler) forControlEvents:UIControlEventTouchUpInside];
-
-    //Adding `em to webview
-    [self.webView.superview addSubview:self.cameraView];
-    [self.webView.superview addSubview:btnClose];
-
-    //Initializing AVFoundation
-    [self.cameraView initializeCamera];
-    
-    
-}
-
-#pragma mark - Action methods
-
--(void) btnCloseHandler
-{
-    NSLog(@"%s",__PRETTY_FUNCTION__);
 }
 
 #pragma mark - LDCFoundationCameraViewDelegate methods
@@ -90,7 +46,19 @@
     CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:imageBase64];
     
     //Sending result to javascript
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
+    [self commonCallbackResponse:pluginResult];
 }
 
+-(void) closeButtonHasBeenTouched{
+    //Sending result to javascript
+    [self commonCallbackResponse:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK ]];
+}
+
+
+-(void) commonCallbackResponse:(CDVPluginResult*) pluginResult{
+    //Sending result to javascript after closing UIViewController
+    [self.takePictureViewController dismissViewControllerAnimated:YES completion:^{
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
+    }];
+}
 @end

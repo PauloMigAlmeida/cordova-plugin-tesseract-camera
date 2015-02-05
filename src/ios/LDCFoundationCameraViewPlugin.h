@@ -13,12 +13,10 @@
 #import <Cordova/CDVPlugin.h>
 
 //Custom components
-#import "LDCFoundationCameraView.h"
+#import "LDCTakePictureViewController.h"
 
 
-@interface LDCFoundationCameraViewPlugin : CDVPlugin<LDCFoundationCameraViewDelegate>
-
-@property(nonatomic, retain) LDCFoundationCameraView* cameraView;
+@interface LDCFoundationCameraViewPlugin : CDVPlugin<LDCTakePictureViewControllerDelegate>
 
 
 -(void)takePicture:(CDVInvokedUrlCommand *) command;
