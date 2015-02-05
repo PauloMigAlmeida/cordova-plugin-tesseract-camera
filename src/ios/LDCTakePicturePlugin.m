@@ -18,11 +18,6 @@
 
 @implementation LDCTakePicturePlugin
 
--(CDVPlugin *)initWithWebView:(UIWebView *)theWebView{
-    self = (LDCFoundationCameraViewPlugin*)[super initWithWebView:theWebView];
-    return self;
-}
-
 -(void)takePicture:(CDVInvokedUrlCommand *) command
 {
 
