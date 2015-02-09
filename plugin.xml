@@ -100,6 +100,8 @@ THE SOFTWARE.
 	<source-file src="src/ios/LDCImageCropImageCropView.m" />
 	<header-file src="src/ios/LDCImageCropShadeView.h" />
 	<source-file src="src/ios/LDCImageCropShadeView.m" />
+	<header-file src="src/ios/LDCImageCropFooterView.h" />
+	<source-file src="src/ios/LDCImageCropFooterView.m" />
 	<header-file src="src/ios/LDCImageCropViewController.h" />
 	<source-file src="src/ios/LDCImageCropViewController.m" />
 	<header-file src="src/ios/LDCImageCropPlugin.h" />
