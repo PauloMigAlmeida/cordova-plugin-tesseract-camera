@@ -32,10 +32,18 @@
 
 #import "LDCImageCropPlugin.h"
 
+@interface LDCImageCropPlugin()
+
+@property(strong,nonatomic) NSString* callbackId;
+
+@end
+
 @implementation LDCImageCropPlugin
 
 -(void)cropImage:(CDVInvokedUrlCommand *)command
 {
+    self.callbackId = command.callbackId;
+    
     NSString* imageData = (NSString*)[command.arguments objectAtIndex:0];
     
     //Base64 decoding
@@ -43,7 +51,31 @@
         
     //Open ViewController
     LDCImageCropViewController* vc = [[LDCImageCropViewController alloc] initWithImage:image];
+    vc.delegate = self;
     [self.viewController presentViewController:vc animated:YES completion:nil];
+}
+
+#pragma mark - LDCImageCropViewControllerDelegate methods
+
+-(void)didFinishCropping:(UIImage *)croppedImage{
+    //Base64 encoding
+    NSString* imageBase64 = [croppedImage base64StringFromImage];
+    
+    //Building plugin result
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:imageBase64];
+    
+    //Sending result to javascript
+    [self commonCallbackResponse:pluginResult];
+}
+
+-(void)didCancel{
+    //Sending result to javascript
+    [self commonCallbackResponse:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK ]];
+}
+
+-(void) commonCallbackResponse:(CDVPluginResult*) pluginResult{
+    //Sending result to javascript after closing UIViewController
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
 }
 
 @end

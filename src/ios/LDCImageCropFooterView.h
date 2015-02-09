@@ -1,5 +1,5 @@
 //
-//  LDCTesseractImageRecognizer.h
+//  LDCImageCropFooterView.h
 //
 //  Version 0.0.1
 //
@@ -30,15 +30,17 @@
 //  THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-#import <TesseractOCR/TesseractOCR.h>
-#import <TesseractOCR/G8RecognitionOperation.h>
+@protocol LDCImageCropFooterViewDelegate <NSObject>
 
-@interface LDCTesseractImageRecognizer : NSObject
+- (void)touchedCropButton;
+- (void)touchedCancelButton;
 
--(void)recognizeText:(UIImage *)image  AndCompletion:(G8RecognitionOperationCallback) completion;
+@end
 
--(void)recognizeText:(UIImage *)image AndCharWhitelist:(NSString *)charWhitelist AndCompletion:(G8RecognitionOperationCallback) completion;
+@interface LDCImageCropFooterView : UIView
+
+@property (nonatomic, weak) id<LDCImageCropFooterViewDelegate> delegate;
 
 @end

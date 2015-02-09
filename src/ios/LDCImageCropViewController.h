@@ -33,34 +33,33 @@
 
 #import <UIKit/UIKit.h>
 
+//Libraries - Temporary
+#import <AssetsLibrary/AssetsLibrary.h>
+
 //Custom components
 #import "LDCImageCropImageCropView.h"
+#import "LDCImageCropFooterView.h"
 
-CGRect SquareCGRectAtCenter(CGFloat centerX, CGFloat centerY, CGFloat size);
+//CGRect SquareCGRectAtCenter(CGFloat centerX, CGFloat centerY, CGFloat size);
 
-UIView* dragView;
+//UIView* dragView;
 
-
-
-#pragma mark ImageCropViewController interface
 @protocol LDCImageCropViewControllerDelegate <NSObject>
 
-- (void)ImageCropViewController:(UIViewController* )controller didFinishCroppingImage:(UIImage *)croppedImage;
-- (void)ImageCropViewControllerDidCancel:(UIViewController *)controller;
+-(void)didFinishCropping:(UIImage*) croppedImage;
+-(void)didCancel;
 
 @end
 
-@interface LDCImageCropViewController : UIViewController<UIActionSheetDelegate > {
+@interface LDCImageCropViewController : UIViewController<LDCImageCropFooterViewDelegate> {
     LDCImageCropImageCropView * cropView;
-    UIActionSheet * actionSheet;
 }
-@property (nonatomic, weak) id<LDCImageCropViewControllerDelegate> delegate;
 @property (nonatomic) BOOL blurredBackground;
 @property (nonatomic, retain) UIImage* image;
 @property (nonatomic, retain) LDCImageCropImageCropView* cropView;
+@property (nonatomic, retain) LDCImageCropFooterView* cropFooterView;
+@property (nonatomic, retain) id<LDCImageCropViewControllerDelegate> delegate;
 
 - (id)initWithImage:(UIImage*)image;
-- (IBAction)cancel:(id)sender;
-- (IBAction)done:(id)sender;
 
 @end

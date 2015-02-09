@@ -35,10 +35,12 @@
 
 #pragma mark LDCImageCropViewController implementation
 
+#define FOOTER_DEFAULT_HEIGHT 132
+
 @implementation LDCImageCropViewController
 
-@synthesize delegate;
 @synthesize cropView;
+@synthesize cropFooterView;
 
 -(id)initWithImage:(UIImage*) image{
     self =  [super init];
@@ -54,6 +56,17 @@
     [super loadView];
 }
 
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
+
+-(BOOL)shouldAutorotate{
+    return false;
+}
+
+-(NSUInteger)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskPortrait;
+}
 
 - (void)viewDidLoad
 {
@@ -61,41 +74,28 @@
     if (self){
         UIView *contentView = [[UIView alloc] init];
         contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        contentView.backgroundColor = [UIColor whiteColor];
+        contentView.backgroundColor = [UIColor blackColor];
         
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
-                                                 initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                 target:self
-                                                 action:@selector(cancel:)];
-        
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
-                                                  initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                  target:self
-                                                  action:@selector(done:)];
         CGSize statusBarSize = [[UIApplication sharedApplication] statusBarFrame].size;
-        CGRect view = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - [[self navigationController] navigationBar].bounds.size.height - statusBarSize.height);
-        self.cropView  = [[LDCImageCropImageCropView alloc] initWithFrame:view blurOn:self.blurredBackground];
+        CGRect cropViewRect = CGRectMake(0, statusBarSize.height, self.view.bounds.size.width, self.view.bounds.size.height - FOOTER_DEFAULT_HEIGHT - statusBarSize.height);
+        CGRect cropFooterRect = CGRectMake(0, cropViewRect.size.height, self.view.bounds.size.width, FOOTER_DEFAULT_HEIGHT);
+        
+        self.cropView  = [[LDCImageCropImageCropView alloc] initWithFrame:cropViewRect blurOn:self.blurredBackground];
+        self.cropFooterView  = [[LDCImageCropFooterView alloc] initWithFrame:cropFooterRect];
+        self.cropFooterView.delegate = self;
+        
         self.view = contentView;
         [contentView addSubview:cropView];
+        [contentView addSubview:cropFooterView];
         [cropView setImage:self.image];
     }
 }
 
-- (IBAction)cancel:(id)sender
-{
-    
-    if ([self.delegate respondsToSelector:@selector(ImageCropViewControllerDidCancel:)])
-    {
-        [self.delegate ImageCropViewControllerDidCancel:self];
-    }
-    
-}
 
-- (IBAction)done:(id)sender
-{
-    
-    if ([self.delegate respondsToSelector:@selector(ImageCropViewController:didFinishCroppingImage:)])
-    {
+#pragma mark - LDCImageCropFooterViewDelegate methods
+
+-(void)touchedCropButton{
+    if([self.delegate respondsToSelector:@selector(didFinishCropping:)]){
         UIImage *cropped;
         if (self.image != nil){
             CGRect CropRect = self.cropView.cropAreaInImage;
@@ -103,10 +103,24 @@
             cropped = [UIImage imageWithCGImage:imageRef];
             CGImageRelease(imageRef);
         }
-        [self.delegate ImageCropViewController:self didFinishCroppingImage:cropped];
+        
+        //Saving it CameraRoll
+        [[[ALAssetsLibrary alloc] init] writeImageToSavedPhotosAlbum:[cropped CGImage] orientation:(ALAssetOrientation)[cropped imageOrientation] completionBlock:nil];
+        
+        [self dismissViewControllerAnimated:YES completion:^{
+            [self.delegate didFinishCropping:cropped];
+        }];
     }
-    
 }
+
+-(void)touchedCancelButton{
+    if([self.delegate respondsToSelector:@selector(didCancel)]){
+        [self dismissViewControllerAnimated:YES completion:^{
+            [self.delegate didCancel];
+        }];
+    }
+}
+
 @end
 
 

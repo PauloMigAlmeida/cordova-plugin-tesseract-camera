@@ -39,8 +39,9 @@
 
 //Categories
 #import "NSString+Base64.h"
+#import "UIImage+Base64.h"
 
-@interface LDCImageCropPlugin : CDVPlugin
+@interface LDCImageCropPlugin : CDVPlugin<LDCImageCropViewControllerDelegate>
 
 -(void) cropImage:(CDVInvokedUrlCommand*) command;
 
