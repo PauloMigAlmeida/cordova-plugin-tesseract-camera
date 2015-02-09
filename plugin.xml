@@ -64,6 +64,9 @@ THE SOFTWARE.
             <feature name="CordovaTesseractImageRecognizer">
                 <param name="ios-package" value="LDCTesseractImageRecognizerPlugin"/>
 	    </feature>
+	    <feature name="CordovaTesseractRealTimeRecognizer">
+		<param name="ios-package" value="LDCTesseractRealtimeRecognizerPlugin" />
+	    </feature>
 	    <feature name="CordovaTesseractCamera">
 		<param name="ios-package" value="LDCTakePicturePlugin" />
 	    </feature>
@@ -81,11 +84,13 @@ THE SOFTWARE.
 	<source-file src="src/ios/LDCTakePictureViewController.m" />
 	<header-file src="src/ios/LDCTakePicturePlugin.h" />
 	<source-file src="src/ios/LDCTakePicturePlugin.m" />
-	<!-- Tesseract Recognizer Plugin -->
+	<!-- Tesseract Image/Realtime Recognizer Plugin -->
 	<header-file src="src/ios/LDCTesseractImageRecognizer.h" />
         <source-file src="src/ios/LDCTesseractImageRecognizer.m" />
 	<header-file src="src/ios/LDCTesseractImageRecognizerPlugin.h" />
         <source-file src="src/ios/LDCTesseractImageRecognizerPlugin.m" />
+	<header-file src="src/ios/LDCTesseractRealtimeRecognizerPlugin.h" />
+        <source-file src="src/ios/LDCTesseractRealtimeRecognizerPlugin.m" />
 	<!-- Image Crop Plugin -->
 	<header-file src="src/ios/LDCFXBlurView.h" />
 	<source-file src="src/ios/LDCFXBlurView.m" />
