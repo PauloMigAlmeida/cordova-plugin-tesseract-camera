@@ -41,7 +41,7 @@ THE SOFTWARE.
     </repo>
 
     <keywords>
-        pauloubuntu, loducca, tesseract, camera, tax, receipt
+        pauloubuntu, loducca, tesseract, camera, ocr, crop
     </keywords>
 
     <license>MIT</license>
@@ -64,8 +64,8 @@ THE SOFTWARE.
             <feature name="CordovaTesseractImageRecognizer">
                 <param name="ios-package" value="LDCTesseractImageRecognizerPlugin"/>
 	    </feature>
-	    <feature name="CordovaTesseractRealTimeRecognizer">
-		<param name="ios-package" value="LDCTesseractRealtimeRecognizerPlugin" />
+	    <feature name="CordovaTesseractCameraRectDetection">
+		<param name="ios-package" value="LDCTesseractCameraRectDetectionPlugin" />
 	    </feature>
 	    <feature name="CordovaTesseractCamera">
 		<param name="ios-package" value="LDCTakePicturePlugin" />
@@ -84,13 +84,14 @@ THE SOFTWARE.
 	<source-file src="src/ios/LDCTakePictureViewController.m" />
 	<header-file src="src/ios/LDCTakePicturePlugin.h" />
 	<source-file src="src/ios/LDCTakePicturePlugin.m" />
-	<!-- Tesseract Image/Realtime Recognizer Plugin -->
+	<!-- Tesseract Camera Rect Detection Plugin -->
+	<header-file src="src/ios/LDCTesseractCameraRectDetectionPlugin.h" />
+	<source-file src="src/ios/LDCTesseractCameraRectDetectionPlugin.m" />
+	<!-- Tesseract Image Recognizer Plugin -->
 	<header-file src="src/ios/LDCTesseractImageRecognizer.h" />
         <source-file src="src/ios/LDCTesseractImageRecognizer.m" />
 	<header-file src="src/ios/LDCTesseractImageRecognizerPlugin.h" />
         <source-file src="src/ios/LDCTesseractImageRecognizerPlugin.m" />
-	<header-file src="src/ios/LDCTesseractRealtimeRecognizerPlugin.h" />
-        <source-file src="src/ios/LDCTesseractRealtimeRecognizerPlugin.m" />
 	<!-- Image Crop Plugin -->
 	<header-file src="src/ios/LDCFXBlurView.h" />
 	<source-file src="src/ios/LDCFXBlurView.m" />
@@ -128,6 +129,7 @@ THE SOFTWARE.
 	<framework src="QuartzCore.framework" />
 	<framework src="Accelerate.framework" />
 	<framework src="src/ios/libs/TesseractOCR.framework" custom="true" />
+	<framework src="src/ios/libs/opencv2.framework" custom="true" />
     	<framework src="libstdc++.6.0.9.dylib" />
 	<framework src="CoreImage.framework" />
 	<framework src="libc++.dylib" />
