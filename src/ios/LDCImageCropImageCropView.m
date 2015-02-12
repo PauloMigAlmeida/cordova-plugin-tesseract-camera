@@ -6,7 +6,7 @@
 //  The MIT License (MIT)
 //
 //  Original work Copyright (c) 2014 Ming Yang <myang.git @t gmail.com>
-//  Modified work Copyright (c) 2014 Paulo Miguel Almeida Rodenas <paulo.ubuntu@gmail.com>
+//  Modified work Copyright (c) 2015 Paulo Miguel Almeida Rodenas <paulo.ubuntu@gmail.com>
 //
 //  Get the latest version from here:
 //

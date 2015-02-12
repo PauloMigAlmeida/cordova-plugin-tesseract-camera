@@ -27,7 +27,7 @@
     BOOL _isStopped;
     
     CGFloat _imageDedectionConfidence;
-    NSTimer *_borderDetectTimeKeeper;
+//    NSTimer *_borderDetectTimeKeeper;
     BOOL _borderDetectFrame;
     CIRectangleFeature *_borderDetectLastRectangleFeature;
     
@@ -43,6 +43,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_foregroundMode) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
+-(void)viewDidLoad
+{
+    [self setupCameraView];
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -54,6 +59,14 @@
 {
     [super viewWillDisappear:animated];
     [self stop];
+}
+
+-(BOOL)shouldAutorotate{
+    return false;
+}
+
+-(NSUInteger)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 - (void)_backgroundMode
@@ -166,11 +179,11 @@
     
 //    if (self.cameraViewType != IPDFCameraViewTypeNormal)
 //    {
-        image = [self filteredImageUsingEnhanceFilterOnImage:image];
+//        image = [self filteredImageUsingEnhanceFilterOnImage:image];
 //    }
 //    else
 //    {
-//        image = [self filteredImageUsingContrastFilterOnImage:image];
+        image = [self filteredImageUsingContrastFilterOnImage:image];
 //    }
     
 //    if (self.isBorderDetectionEnabled)
@@ -202,10 +215,10 @@
     }
 }
 
-- (void)enableBorderDetectFrame
-{
-    _borderDetectFrame = YES;
-}
+//- (void)enableBorderDetectFrame
+//{
+//    _borderDetectFrame = YES;
+//}
 
 - (CIImage *)drawHighlightOverlayForPoints:(CIImage *)image topLeft:(CGPoint)topLeft topRight:(CGPoint)topRight bottomLeft:(CGPoint)bottomLeft bottomRight:(CGPoint)bottomRight
 {
@@ -222,7 +235,7 @@
     
     [self.captureSession startRunning];
     
-    _borderDetectTimeKeeper = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(enableBorderDetectFrame) userInfo:nil repeats:YES];
+//    _borderDetectTimeKeeper = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(enableBorderDetectFrame) userInfo:nil repeats:YES];
     
     [self hideGLKView:NO completion:nil];
 }
@@ -233,7 +246,7 @@
     
     [self.captureSession stopRunning];
     
-    [_borderDetectTimeKeeper invalidate];
+//    [_borderDetectTimeKeeper invalidate];
     
     [self hideGLKView:YES completion:nil];
 }
