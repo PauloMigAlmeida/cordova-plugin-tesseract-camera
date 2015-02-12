@@ -1,5 +1,5 @@
 //
-//  LDCTesseractRealtimeRecognizerPlugin.h
+//  LDCTesseractCameraRectDetectionPlugin.h
 //
 //  Version 0.0.1
 //
@@ -36,6 +36,11 @@
 #import <Cordova/CDV.h>
 #import <Cordova/CDVPlugin.h>
 
-@interface LDCTesseractRealtimeRecognizerPlugin : CDVPlugin
+//ViewControllers
+#import "LDCTesseractCameraRectDetectionViewController.h"
+
+@interface LDCTesseractCameraRectDetectionPlugin : CDVPlugin
+
+-(void) takePicture:(CDVInvokedUrlCommand*) command;
 
 @end

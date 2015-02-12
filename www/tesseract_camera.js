@@ -4,13 +4,9 @@ exports.recognize = function (imageData, charWhiteList, callbackSuccess, callbac
     exec(callbackSuccess, callbackFailure, 'CordovaTesseractImageRecognizer', 'recognizeImage', [imageData, charWhiteList]);
 };
 
-exports.realtimeRecognizerStart = function(charWhiteList, callbackSuccess, callbackFailure){
-    exec(callbackSuccess, callbackFailure, 'CordovaTesseractRealTimeRecognizer', 'start', [charWhiteList]);
+exports.recognizeRect = function(callbackSuccess, callbackFailure){
+    exec(callbackSuccess, callbackFailure, 'CordovaTesseractCameraRectDetection', 'takePicture', []);
 }
-
-exports.realtimeRecognizeClose = function(callbackSuccess, callbackFailure){
-    exec(callbackSuccess, callbackFailure, 'CordovaTesseractRealTimeRecognizer', 'stop', []);
-};
 
 exports.takePicture = function (callbackSuccess, callbackFailure){
     exec(callbackSuccess, callbackFailure, 'CordovaTesseractCamera', 'takePicture', []);

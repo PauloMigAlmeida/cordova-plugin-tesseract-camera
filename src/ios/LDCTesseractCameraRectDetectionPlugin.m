@@ -1,5 +1,5 @@
 //
-//  LDCTesseractRealtimeRecognizerPlugin.m
+//  LDCTesseractCameraRectDetectionPlugin.m
 //
 //  Version 0.0.1
 //
@@ -31,8 +31,23 @@
 //
 
 
-#import "LDCTesseractRealtimeRecognizerPlugin.h"
+#import "LDCTesseractCameraRectDetectionPlugin.h"
 
-@implementation LDCTesseractRealtimeRecognizerPlugin
+@interface LDCTesseractCameraRectDetectionPlugin()
 
+@property(strong,nonatomic) NSString* callbackId;
+@property(strong,nonatomic) LDCTesseractCameraRectDetectionViewController* takePictureViewController;
+
+@end
+
+@implementation LDCTesseractCameraRectDetectionPlugin
+
+-(void) takePicture:(CDVInvokedUrlCommand*) command{
+    self.callbackId = command.callbackId;
+    
+    self.takePictureViewController = [[LDCTesseractCameraRectDetectionViewController alloc]init];
+//    self.takePictureViewController.delegate = self;
+    [self.viewController presentViewController:self.takePictureViewController animated:YES completion:nil];
+    
+}
 @end
