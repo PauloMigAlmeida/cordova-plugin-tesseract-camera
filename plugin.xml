@@ -118,7 +118,7 @@ THE SOFTWARE.
 	<source-file src="src/ios/NSString+Base64.m" />
 	<!-- Shared -->
 	<header-file src="src/ios/LDCOpenCVIntegration.h" />
-        <source-file src="src/ios/LDCOpenCVIntegration.m" />
+        <source-file src="src/ios/LDCOpenCVIntegration.mm" />
 
 	<!-- Image Assets that need to be compiled alogn with iOS code -->
 	<source-file src="src/ios/assets/btnFotografarNotinha.png" />
