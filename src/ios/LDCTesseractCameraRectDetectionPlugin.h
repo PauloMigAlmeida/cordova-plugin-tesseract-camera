@@ -39,7 +39,7 @@
 //ViewControllers
 #import "LDCTesseractCameraRectDetectionViewController.h"
 
-@interface LDCTesseractCameraRectDetectionPlugin : CDVPlugin
+@interface LDCTesseractCameraRectDetectionPlugin : CDVPlugin<LDCTesseractCameraRectDetectionViewControllerDelegate>
 
 -(void) takePicture:(CDVInvokedUrlCommand*) command;
 

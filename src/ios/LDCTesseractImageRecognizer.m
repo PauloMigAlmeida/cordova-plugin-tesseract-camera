@@ -57,7 +57,7 @@
 -(void)recognizeText:(UIImage *)image AndCharWhitelist:(NSString *)charWhitelist AndCompletion:(G8RecognitionOperationCallback) completion
 {
     
-    UIImage *bwImage = image;
+    UIImage *bwImage = [image g8_blackAndWhite];
     
     G8RecognitionOperation *operation = [[G8RecognitionOperation alloc] init];
     
@@ -65,11 +65,20 @@
     
     operation.tesseract.engineMode = G8OCREngineModeTesseractOnly;
     
-    operation.tesseract.pageSegmentationMode = G8PageSegmentationModeAutoOnly;
+    operation.tesseract.pageSegmentationMode = G8PageSegmentationModeAuto;
     
     if(charWhitelist){
         operation.tesseract.charWhitelist = charWhitelist;
     }
+
+    //Setting tesseract variables parameters
+    [operation.tesseract setVariableValue:@"false" forKey:kG8ParamLoadSystemDawg];
+    [operation.tesseract setVariableValue:@"false" forKey:kG8ParamLoadFreqDawg];
+    [operation.tesseract setVariableValue:@"false" forKey:kG8ParamLoadPuncDawg];
+    [operation.tesseract setVariableValue:@"false" forKey:kG8ParamLoadNumberDawg];
+    [operation.tesseract setVariableValue:@"false" forKey:kG8ParamLoadUnambigDawg];
+    [operation.tesseract setVariableValue:@"false" forKey:kG8ParamLoadBigramDawg];
+    [operation.tesseract setVariableValue:@"false" forKey:kG8ParamLoadFixedLengthDawgs];
     
     operation.tesseract.image = bwImage;
     

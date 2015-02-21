@@ -40,12 +40,22 @@
 #import <ImageIO/ImageIO.h>
 #import <GLKit/GLKit.h>
 
-typedef NS_ENUM(NSInteger,IPDFCameraViewType)
-{
-    IPDFCameraViewTypeBlackAndWhite,
-    IPDFCameraViewTypeNormal
-};
+//Categories
+#import "UIImage+Base64.h"
+
+//typedef NS_ENUM(NSInteger,IPDFCameraViewType)
+//{
+//    IPDFCameraViewTypeBlackAndWhite,
+//    IPDFCameraViewTypeNormal
+//};
+
+@protocol LDCTesseractCameraRectDetectionViewControllerDelegate <NSObject>
+
+-(void) snapStillImageHasBeenTaken:(UIImage*) image;
+-(void) closeButtonHasBeenTouched; // Yet to be implemented
+@end
 
 @interface LDCTesseractCameraRectDetectionViewController : UIViewController<AVCaptureVideoDataOutputSampleBufferDelegate>
 
+@property (nonatomic, retain) id<LDCTesseractCameraRectDetectionViewControllerDelegate> delegate;
 @end

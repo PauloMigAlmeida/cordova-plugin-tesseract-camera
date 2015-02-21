@@ -39,6 +39,9 @@
 //Local Files
 #import "LDCTesseractImageRecognizer.h"
 
+//Temp
+#import "LDCOpenCVIntegration.h"
+
 //Categories
 #import "NSString+Base64.h"
 

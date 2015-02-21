@@ -46,6 +46,9 @@
         
         UIImage* imageToBeRecognized = [imageData imageFromBase64String];
         
+        LDCOpenCVIntegration* opencv = [[LDCOpenCVIntegration alloc]init];
+        imageToBeRecognized = [opencv resize:imageToBeRecognized AndFactor:0.5];
+        
         [tesseract recognizeText:imageToBeRecognized AndCharWhitelist:charWhiteList AndCompletion:^(G8Tesseract *tesseract) {
             
             // Fetch the recognized text

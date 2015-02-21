@@ -34,6 +34,7 @@
 
 #import <TesseractOCR/TesseractOCR.h>
 #import <TesseractOCR/G8RecognitionOperation.h>
+#import <TesseractOCR/G8TesseractParameters.h>
 
 @interface LDCTesseractImageRecognizer : NSObject
 

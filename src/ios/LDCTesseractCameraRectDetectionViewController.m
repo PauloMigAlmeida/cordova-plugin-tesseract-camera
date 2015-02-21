@@ -71,6 +71,7 @@
 -(void)viewDidLoad
 {
     [self setupCameraView];
+    [self createUI];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -126,6 +127,35 @@
     glBindRenderbuffer(GL_RENDERBUFFER, _renderBuffer);
     _coreImageContext = [CIContext contextWithEAGLContext:self.context];
     [EAGLContext setCurrentContext:self.context];
+}
+
+-(void) createUI
+{
+    CGSize snapStillImageCaptureButtonSize = CGSizeMake(110, 106);
+    CGRect snapStillImageCaptureButtonRect = CGRectMake(
+                                                        (self.view.frame.size.width  - snapStillImageCaptureButtonSize.width ) / 2,
+                                                        self.view.frame.size.height - snapStillImageCaptureButtonSize.height,
+                                                        snapStillImageCaptureButtonSize.width,
+                                                        snapStillImageCaptureButtonSize.height);
+    
+    UIButton *snapStillImageCaptureButton = [[UIButton alloc] initWithFrame:snapStillImageCaptureButtonRect];
+    [snapStillImageCaptureButton setImage:[UIImage imageNamed:@"btnFotografarNotinha.png"] forState:UIControlStateNormal];
+    
+    [snapStillImageCaptureButton addTarget:self action:@selector(snapStillImageCameraHandler) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:snapStillImageCaptureButton];
+}
+
+-(void) snapStillImageCameraHandler
+{
+    [self captureImageWithCompletionHander:^(id data) {
+        UIImage *image = ([data isKindOfClass:[NSData class]]) ? [UIImage imageWithData:data] : data;
+        
+        if([self.delegate respondsToSelector:@selector(snapStillImageHasBeenTaken:)])
+        {
+            [self.delegate snapStillImageHasBeenTaken:image];
+        }
+    }];
 }
 
 - (void)setupCameraView
