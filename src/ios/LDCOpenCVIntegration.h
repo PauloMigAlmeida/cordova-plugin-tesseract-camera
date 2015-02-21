@@ -19,6 +19,6 @@
 @interface LDCOpenCVIntegration : NSObject
 
 -(double) calculateSkewAngle:(UIImage*) image;
--(UIImage*) resize:(UIImage*) image AndFactor:(double) factor;
+-(UIImage*) resize:(UIImage*) image AndFactorX:(double) factorX AndFactorY:(double) factorY;
 
 @end

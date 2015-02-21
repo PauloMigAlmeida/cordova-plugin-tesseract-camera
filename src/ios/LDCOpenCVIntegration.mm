@@ -169,11 +169,11 @@ using namespace std;
     [[[ALAssetsLibrary alloc] init] writeImageToSavedPhotosAlbum:[temp CGImage] orientation:(ALAssetOrientation)[temp imageOrientation] completionBlock:nil];
 }
 
--(UIImage*) resize:(UIImage*) image AndFactor:(double) factor
+-(UIImage*) resize:(UIImage*) image AndFactorX:(double) factorX AndFactorY:(double) factorY
 {
     Mat src = [self cvMatFromUIImage:image];
     Mat scale_down;
-    resize(src, scale_down, cv::Size(), factor, factor);
+    resize(src, scale_down, cv::Size(), factorX, factorY);
     src.release();
     return [self UIImageFromCVMat:scale_down];
 }

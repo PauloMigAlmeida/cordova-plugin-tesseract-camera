@@ -1,5 +1,5 @@
 //
-//  LDCTesseractImageRecognizerPlugin.m
+//  LDCImageResizePlugin.m
 //
 //  Version 0.0.1
 //
@@ -29,41 +29,38 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 //
-#import "LDCTesseractImageRecognizerPlugin.h"
 
-@implementation LDCTesseractImageRecognizerPlugin
+#import "LDCImageResizePlugin.h"
 
--(void)recognizeImage:(CDVInvokedUrlCommand *)command
+@implementation LDCImageResizePlugin
+
+-(void)resizeImage:(CDVInvokedUrlCommand *)command
 {
     NSString* imageData = (NSString*)[command.arguments objectAtIndex:0];
-    NSString* charWhiteList = (NSString*)[command.arguments objectAtIndex:1 withDefault:nil];
+    double factorHorizontalAxis = [(NSNumber*)[command.arguments objectAtIndex:1] doubleValue];
+    double factorVerticalAxis = [(NSNumber*)[command.arguments objectAtIndex:2] doubleValue];
     
-    __weak LDCTesseractImageRecognizerPlugin* weakSelf = self;
+    __weak LDCImageResizePlugin* weakSelf = self;
     
     [self.commandDelegate runInBackground:^{
         
-        LDCTesseractImageRecognizer* tesseract = [[LDCTesseractImageRecognizer alloc] init];
+        LDCOpenCVIntegration* opencv  = [[LDCOpenCVIntegration alloc]init];
         
         UIImage* imageToBeRecognized = [imageData imageFromBase64String];
         
-        LDCOpenCVIntegration* opencv = [[LDCOpenCVIntegration alloc]init];
-        imageToBeRecognized = [opencv resize:imageToBeRecognized AndFactorX:0.5 AndFactorY:0.5];
+        imageToBeRecognized = [opencv resize:imageToBeRecognized AndFactorX:factorHorizontalAxis AndFactorY:factorVerticalAxis];
         
-        [tesseract recognizeText:imageToBeRecognized AndCharWhitelist:charWhiteList AndCompletion:^(G8Tesseract *tesseract) {
-            
-            // Fetch the recognized text
-            NSString *recognizedText = tesseract.recognizedText;
         
-            CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:recognizedText];
-            [weakSelf.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-        }];
+        // Convert NSString to Base 64
+        NSString *imageBase64 = [imageToBeRecognized base64StringFromImage];
+        
+        //Send back to JS interface
+        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:imageBase64];
+        [weakSelf.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
         
     }];
     
 }
 
--(UIImage*) imageFromBase64String:(NSString*) base64String{
-    NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:base64String options:NSDataBase64DecodingIgnoreUnknownCharacters];
-    return [UIImage imageWithData:decodedData];
-}
+
 @end
