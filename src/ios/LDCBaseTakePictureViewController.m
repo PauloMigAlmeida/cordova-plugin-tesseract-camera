@@ -164,9 +164,9 @@
 
 -(void) setPresetResolution
 {
-    if([self.session canSetSessionPreset:AVCaptureSessionPreset1920x1080])
+    if([self.session canSetSessionPreset:AVCaptureSessionPresetHigh])
     {
-        self.session.sessionPreset = AVCaptureSessionPreset1920x1080;
+        self.session.sessionPreset = AVCaptureSessionPresetHigh;
     }
     else
     {
@@ -218,6 +218,7 @@
     
     for (AVCaptureDevice *device in devices)
     {
+        NSLog(@"%s - %@",__PRETTY_FUNCTION__, [device description]  );
         if ([device position] == position)
         {
             captureDevice = device;
