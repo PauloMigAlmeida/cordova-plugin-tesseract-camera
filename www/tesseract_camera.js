@@ -22,16 +22,16 @@ exports.takePicture = function (preferedPosition, callbackSuccess, callbackFailu
 	var _cameraPreferedPosition = null;
 	var _cropMarkers = false;
 	
-	if(xor(((preferedPosition & CameraPreferedPosition.BACK_CAMERA) == CameraPreferedPosition.BACK_CAMERA),((preferedPosition & CameraPreferedPosition.FRONT_CAMERA)  == CameraPreferedPosition.FRONT_CAMERA))){
-	    if (preferedPosition & CameraPreferedPosition.BACK_CAMERA){
+	if(xor(((preferedPosition & exports.CameraPreferedPosition.BACK_CAMERA) == exports.CameraPreferedPosition.BACK_CAMERA),((preferedPosition & exports.CameraPreferedPosition.FRONT_CAMERA)  == exports.CameraPreferedPosition.FRONT_CAMERA))){
+	    if (preferedPosition & exports.CameraPreferedPosition.BACK_CAMERA){
 			_cameraPreferedPosition = 'back';
 	        console.log("BACK_CAMERA selected");
 	    }
-	    if (preferedPosition & CameraPreferedPosition.FRONT_CAMERA){
+	    if (preferedPosition & exports.CameraPreferedPosition.FRONT_CAMERA){
 	        _cameraPreferedPosition = 'front';
 			console.log("FRONT_CAMERA selected");
 	    }
-	    if (preferedPosition & CameraPreferedPosition.CROP_MARKERS){
+	    if (preferedPosition & exports.CameraPreferedPosition.CROP_MARKERS){
 			_cropMarkers = true;
 	        console.log("CROP_MARKERS selected");
 	    }
