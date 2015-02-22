@@ -32,28 +32,9 @@
 
 #import <UIKit/UIKit.h>
 
-//Libraries
-#import <Cordova/CDV.h>
-#import <Cordova/CDVPlugin.h>
-#import <AVFoundation/AVFoundation.h>
-#import <AssetsLibrary/AssetsLibrary.h>
+//Base
+#import "LDCBaseTakePictureViewController.h"
 
-//Custom Components
-#import "LDCFoundationCameraView.h"
-#import "LDCFoundationCameraFooterView.h"
-
-//Categories
-#import <TesseractOCR/UIImage+G8Filters.h>
-#import "UIImage+Rotate.h"
-
-@protocol LDCTakePictureViewControllerDelegate <NSObject>
-
--(void) snapStillImageHasBeenTaken:(UIImage*) image;
--(void) closeButtonHasBeenTouched;
-@end
-
-@interface LDCTakePictureViewController : UIViewController<LDCFoundationCameraFooterViewDelegate>
-
-@property(nonatomic, retain) id<LDCTakePictureViewControllerDelegate> delegate;
+@interface LDCTakePictureViewController : LDCBaseTakePictureViewController<LDCFoundationCameraFooterViewDelegate>
 
 @end
