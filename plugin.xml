@@ -85,6 +85,8 @@ THE SOFTWARE.
 		<source-file src="src/ios/LDCFoundationCameraFooterView.m" />
 		<header-file src="src/ios/LDCTakePictureViewController.h" />
 		<source-file src="src/ios/LDCTakePictureViewController.m" />
+		<header-file src="src/ios/LDCTakePictureFrontViewController.h" />
+		<source-file src="src/ios/LDCTakePictureFrontViewController.m" />
 		<header-file src="src/ios/LDCTakePicturePlugin.h" />
 		<source-file src="src/ios/LDCTakePicturePlugin.m" />
 		<!-- Tesseract Camera Rect Detection Plugin -->
