@@ -45,12 +45,6 @@
     self.cameraView = [[LDCFoundationCameraView alloc] initWithFrame:self.view.frame];
     [self.view addSubview:self.cameraView];
     
-    //Creating Close Button
-    UIButton *btnClose = [[UIButton alloc] initWithFrame:CGRectMake(0, 10, 56, 56)];
-    [btnClose setImage:[UIImage imageNamed:@"btn_close.png"] forState:UIControlStateNormal];
-    [btnClose addTarget:self action:@selector(btnCloseHandler) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btnClose];
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -208,7 +202,6 @@
     
     for (AVCaptureDevice *device in devices)
     {
-        NSLog(@"%s - %@",__PRETTY_FUNCTION__, [device description]  );
         if ([device position] == position)
         {
             captureDevice = device;
@@ -218,15 +211,5 @@
     
     return captureDevice;
 }
-
-
-#pragma mark - Action methods
-
--(void) btnCloseHandler{
-    if(self.delegate){
-        [self.delegate closeButtonHasBeenTouched];
-    }
-}
-
 
 @end

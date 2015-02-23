@@ -37,4 +37,5 @@
 
 @interface LDCTakePictureViewController : LDCBaseTakePictureViewController<LDCFoundationCameraFooterViewDelegate>
 
+
 @end

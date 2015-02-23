@@ -38,7 +38,6 @@
 
 //Custom components
 #import "LDCTakePictureViewController.h"
-#import "LDCTakePictureFrontViewController.h"
 
 //Categories
 #import "UIImage+Base64.h"

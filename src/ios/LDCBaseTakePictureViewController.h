@@ -47,8 +47,9 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 #define FOOTER_DEFAULT_HEIGHT 132
 
 @protocol LDCBaseTakePictureViewControllerDelegate <NSObject>
-
+@required
 -(void) snapStillImageHasBeenTaken:(UIImage*) image;
+@optional
 -(void) closeButtonHasBeenTouched;
 @end
 
@@ -69,7 +70,6 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 
 //UI compoenents
 @property(nonatomic, retain) LDCFoundationCameraView* cameraView;
-@property(nonatomic, retain) LDCFoundationCameraFooterView* footerView;
 
 
 //Delegates

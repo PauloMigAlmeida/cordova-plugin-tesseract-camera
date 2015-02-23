@@ -35,7 +35,7 @@
 @interface LDCTakePicturePlugin()
 
 @property(strong,nonatomic) NSString* callbackId;
-@property(strong,nonatomic) LDCBaseTakePictureViewController* takePictureViewController;
+@property(strong,nonatomic) LDCTakePictureViewController* takePictureViewController;
 
 @end
 
@@ -49,10 +49,9 @@
     NSString* cameraPreferedPosition = (NSString*)[command.arguments objectAtIndex:0 withDefault:@"back"];
     BOOL cropMarkers = [((NSString*)[command.arguments objectAtIndex:1 withDefault:@"false"]) boolValue];
     
+    //TODO implement camera set accordingly to cameraPreferedPosition parameter
     if([cameraPreferedPosition isEqualToString:@"back"]){
         self.takePictureViewController = [[LDCTakePictureViewController alloc]init];
-    }else{
-        self.takePictureViewController = [[LDCTakePictureFrontViewController alloc]init];
     }
     
     self.takePictureViewController.delegate = self;

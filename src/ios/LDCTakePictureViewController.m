@@ -52,8 +52,13 @@
 -(void)viewDidLoad{
     
     [super viewDidLoad];
-    self.footerView.delegate = self;
     self.preferedPosition = AVCaptureDevicePositionBack;
+    
+    //Creating Close Button
+    UIButton *btnClose = [[UIButton alloc] initWithFrame:CGRectMake(0, 10, 56, 56)];
+    [btnClose setImage:[UIImage imageNamed:@"btn_close.png"] forState:UIControlStateNormal];
+    [btnClose addTarget:self action:@selector(btnCloseHandler) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btnClose];
     
     //Add LDCFoundationCameraFooterView
     CGRect cameraFooterRect = CGRectMake(
@@ -62,8 +67,9 @@
                                          self.view.frame.size.width,
                                          FOOTER_DEFAULT_HEIGHT
                                          );
-    self.footerView = [[LDCFoundationCameraFooterView alloc] initWithFrame:cameraFooterRect];
-    [self.view addSubview:self.footerView];
+    LDCFoundationCameraFooterView* footerView = [[LDCFoundationCameraFooterView alloc] initWithFrame:cameraFooterRect];
+    footerView.delegate = self;
+    [self.view addSubview:footerView];
     
     //Adding Corner Markers
     CGRect usableArea = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height - FOOTER_DEFAULT_HEIGHT);
@@ -192,5 +198,12 @@
     [self snapStillImage];
 }
 
+#pragma mark - Action methods
+
+-(void) btnCloseHandler{
+    if(self.delegate){
+        [self.delegate closeButtonHasBeenTouched];
+    }
+}
 
 @end
