@@ -55,6 +55,16 @@
     self.footerView.delegate = self;
     self.preferedPosition = AVCaptureDevicePositionBack;
     
+    //Add LDCFoundationCameraFooterView
+    CGRect cameraFooterRect = CGRectMake(
+                                         self.view.frame.origin.x,
+                                         self.view.frame.size.height - FOOTER_DEFAULT_HEIGHT,
+                                         self.view.frame.size.width,
+                                         FOOTER_DEFAULT_HEIGHT
+                                         );
+    self.footerView = [[LDCFoundationCameraFooterView alloc] initWithFrame:cameraFooterRect];
+    [self.view addSubview:self.footerView];
+    
     //Adding Corner Markers
     CGRect usableArea = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height - FOOTER_DEFAULT_HEIGHT);
     CGSize defaultCornerSize = CGSizeMake(64, 55);

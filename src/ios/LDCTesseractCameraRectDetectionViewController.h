@@ -40,6 +40,9 @@
 #import <ImageIO/ImageIO.h>
 #import <GLKit/GLKit.h>
 
+//Custom components
+#import "LDCFoundationCameraFooterView.h"
+
 //Categories
 #import "UIImage+Base64.h"
 

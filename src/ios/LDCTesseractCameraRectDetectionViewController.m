@@ -43,6 +43,8 @@
 
 @end
 
+#define FOOTER_DEFAULT_HEIGHT 132
+
 @implementation LDCTesseractCameraRectDetectionViewController
 {
     CIContext *_coreImageContext;
@@ -131,10 +133,23 @@
 
 -(void) createUI
 {
+    
+    //Add LDCFoundationCameraFooterView
+    CGRect cameraFooterRect = CGRectMake(
+                                         self.view.frame.origin.x,
+                                         self.view.frame.size.height - FOOTER_DEFAULT_HEIGHT,
+                                         self.view.frame.size.width,
+                                         FOOTER_DEFAULT_HEIGHT
+                                         );
+    LDCFoundationCameraFooterView* footerView = [[LDCFoundationCameraFooterView alloc] initWithFrame:cameraFooterRect];
+
+    
+    footerView.backgroundColor = [UIColor colorWithRed:0.15 green:0.15 blue:0.15 alpha:1.0];
+    
     CGSize snapStillImageCaptureButtonSize = CGSizeMake(110, 106);
     CGRect snapStillImageCaptureButtonRect = CGRectMake(
-                                                        (self.view.frame.size.width  - snapStillImageCaptureButtonSize.width ) / 2,
-                                                        self.view.frame.size.height - snapStillImageCaptureButtonSize.height,
+                                                        (footerView.frame.size.width  - snapStillImageCaptureButtonSize.width ) / 2,
+                                                        footerView.frame.size.height - snapStillImageCaptureButtonSize.height,
                                                         snapStillImageCaptureButtonSize.width,
                                                         snapStillImageCaptureButtonSize.height);
     
@@ -143,7 +158,16 @@
     
     [snapStillImageCaptureButton addTarget:self action:@selector(snapStillImageCameraHandler) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview:snapStillImageCaptureButton];
+    [footerView addSubview:snapStillImageCaptureButton];
+    
+    
+    [self.view addSubview:footerView];
+    
+    //Creating Close Button
+    UIButton *btnClose = [[UIButton alloc] initWithFrame:CGRectMake(0, 10, 56, 56)];
+    [btnClose setImage:[UIImage imageNamed:@"btn_close.png"] forState:UIControlStateNormal];
+    [btnClose addTarget:self action:@selector(btnCloseHandler) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btnClose];
 }
 
 -(void) snapStillImageCameraHandler
@@ -525,4 +549,11 @@ BOOL rectangleDetectionConfidenceHighEnough(float confidence)
     return (confidence > 1.0);
 }
 
+#pragma mark - LDCTesseractCameraRectDetectionViewControllerDelegate methods
+
+-(void) btnCloseHandler{
+    if(self.delegate){
+        [self.delegate closeButtonHasBeenTouched];
+    }
+}
 @end

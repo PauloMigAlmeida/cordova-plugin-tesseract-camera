@@ -45,16 +45,6 @@
     self.cameraView = [[LDCFoundationCameraView alloc] initWithFrame:self.view.frame];
     [self.view addSubview:self.cameraView];
     
-    //Add LDCFoundationCameraFooterView
-    CGRect cameraFooterRect = CGRectMake(
-                                         self.view.frame.origin.x,
-                                         self.view.frame.size.height - FOOTER_DEFAULT_HEIGHT,
-                                         self.view.frame.size.width,
-                                         FOOTER_DEFAULT_HEIGHT
-                                         );
-    self.footerView = [[LDCFoundationCameraFooterView alloc] initWithFrame:cameraFooterRect];
-    [self.view addSubview:self.footerView];
-    
     //Creating Close Button
     UIButton *btnClose = [[UIButton alloc] initWithFrame:CGRectMake(0, 10, 56, 56)];
     [btnClose setImage:[UIImage imageNamed:@"btn_close.png"] forState:UIControlStateNormal];
