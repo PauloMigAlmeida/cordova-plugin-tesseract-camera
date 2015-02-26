@@ -50,5 +50,5 @@ exports.cropImage = function (imageData,callbackSuccess, callbackFailure){
 };
 
 exports.resizeImageByFactor = function (imageData, factorHorizontalAxis, factorVerticalAxis,callbackSuccess, callbackFailure){
-    exec(callbackSuccess, callbackFailure, 'CordovaTesseractImageResize', 'resizeImage', [imageData]);
+    exec(callbackSuccess, callbackFailure, 'CordovaTesseractImageResize', 'resizeImage', [imageData, factorHorizontalAxis, factorVerticalAxis]);
 };
