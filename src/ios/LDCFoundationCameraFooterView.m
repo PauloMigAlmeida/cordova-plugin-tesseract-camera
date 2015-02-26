@@ -42,21 +42,21 @@
 }
 
 -(void) initialize{
-    self.backgroundColor = [UIColor colorWithRed:0.15 green:0.15 blue:0.15 alpha:1.0];
-    
-    CGSize snapStillImageCaptureButtonSize = CGSizeMake(110, 106);
-    CGRect snapStillImageCaptureButtonRect = CGRectMake(
-                                                (self.frame.size.width  - snapStillImageCaptureButtonSize.width ) / 2,
-                                                self.frame.size.height - snapStillImageCaptureButtonSize.height,
-                                                snapStillImageCaptureButtonSize.width,
-                                                snapStillImageCaptureButtonSize.height);
-    
-    UIButton *snapStillImageCaptureButton = [[UIButton alloc] initWithFrame:snapStillImageCaptureButtonRect];
-    [snapStillImageCaptureButton setImage:[UIImage imageNamed:@"btnFotografarNotinha.png"] forState:UIControlStateNormal];
-
-    [snapStillImageCaptureButton addTarget:self action:@selector(snapStillImageCameraHandler) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self addSubview:snapStillImageCaptureButton];
+	self.backgroundColor = [UIColor colorWithRed:0.15 green:0.15 blue:0.15 alpha:1.0];
+	
+	CGSize snapStillImageCaptureButtonSize = CGSizeMake(100, 96);
+	CGRect snapStillImageCaptureButtonRect = CGRectMake(
+														(self.frame.size.width  - snapStillImageCaptureButtonSize.width ) / 2,
+														self.frame.size.height - snapStillImageCaptureButtonSize.height -10,
+														snapStillImageCaptureButtonSize.width,
+														snapStillImageCaptureButtonSize.height);
+	
+	UIButton *snapStillImageCaptureButton = [[UIButton alloc] initWithFrame:snapStillImageCaptureButtonRect];
+	[snapStillImageCaptureButton setImage:[UIImage imageNamed:@"btnFotografarNotinha.png"] forState:UIControlStateNormal];
+	
+	[snapStillImageCaptureButton addTarget:self action:@selector(snapStillImageCameraHandler) forControlEvents:UIControlEventTouchUpInside];
+	
+	[self addSubview:snapStillImageCaptureButton];
 }
 
 -(void) snapStillImageCameraHandler{
