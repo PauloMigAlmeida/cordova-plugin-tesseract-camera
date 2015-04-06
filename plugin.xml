@@ -130,10 +130,26 @@ THE SOFTWARE.
    <!-- android -->
    <platform name="android">
       <config-file target="res/xml/config.xml" parent="/*">
-         <feature name="InstaGraaccCamera">
-            <param name="android-package" value="br.com.loducca.instagraacc.cordova.plugin.camera.InstaGraaccCamera" />
-         </feature>
+         <feature name="CordovaTesseractCameraRectDetection" >
+                <param name="android-package" value="com.github.pauloubuntu.tesseractcamera.LDCTesseractCameraRectDetectionPlugin"/>
+            </feature>
       </config-file>
+      
+      <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-feature android:name="android.hardware.camera" android:required="true" />
+            <uses-feature android:name="android.hardware.camera.autofocus" android:required="true" />
+            <uses-permission android:name="android.permission.CAMERA" />
+      </config-file>
+      
+      <!-- Tesseract Camera Rect Detection Plugin -->
+      <source-file src="src/android/CameraPreview.java" target-dir="src/com/github/pauloubuntu/tesseractcamera/" />
+      <source-file src="src/android/LDCTesseractCameraOpenCVIntegration.java" target-dir="src/com/github/pauloubuntu/tesseractcamera/" />
+      <source-file src="src/android/LDCTesseractCameraRectDetectionPlugin.java" target-dir="src/com/github/pauloubuntu/tesseractcamera/" />
+      <source-file src="src/android/LDCTesseractCameraRectDetectionActivity.java" target-dir="src/com/github/pauloubuntu/tesseractcamera/" />
+      <source-file src="src/android/layout/main.xml" target-dir="res/layout/" />
+      <source-file src="src/android/libs/ImageProcessing.cpp" target-dir="jni/" />      
+      
+      <!-- Tesseract and Leptonica -->
       <source-file src="src/android/libs/Android.mk" target-dir="jni/" />
       <source-file src="src/android/libs/Application.mk" target-dir="jni/" />
       <source-file src="src/android/libs/com_googlecode_leptonica_android/Android.mk" target-dir="jni/com_googlecode_leptonica_android/" />
@@ -1635,5 +1651,9 @@ THE SOFTWARE.
       <source-file src="src/android/libs/com_googlecode_tesseract_android/src/wordrec/wordrec.cpp" target-dir="jni/com_googlecode_tesseract_android/src/wordrec/" />
       <source-file src="src/android/libs/com_googlecode_tesseract_android/src/wordrec/wordrec.h" target-dir="jni/com_googlecode_tesseract_android/src/wordrec/" />
       <source-file src="src/android/libs/com_googlecode_tesseract_android/tessbaseapi.cpp" target-dir="jni/com_googlecode_tesseract_android/" />
+      
+      <!-- OpenCV framework -->
+      <framework src="src/android/libs/OpenCV-2.4.10-android-sdk/sdk/java" custom="true" />
+
    </platform>
 </plugin>

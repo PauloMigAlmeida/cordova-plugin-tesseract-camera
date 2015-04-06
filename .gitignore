@@ -31,3 +31,6 @@ Pods/
 
 #Mac
 .DS_Store
+
+#Jedit
+*~
