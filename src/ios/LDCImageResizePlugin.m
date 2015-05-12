@@ -83,7 +83,7 @@
         
         
         // Convert NSString to Base 64
-        NSString *imageBase64 = [imageToBeRecognized base64StringFromImage];
+	NSString *imageBase64 = [imageToBeRecognized base64StringFromImage:qualityOutput];
         
         //Send back to JS interface
         CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:imageBase64];
