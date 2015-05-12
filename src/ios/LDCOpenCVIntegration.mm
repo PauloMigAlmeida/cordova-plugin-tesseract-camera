@@ -178,4 +178,21 @@ using namespace std;
     return [self UIImageFromCVMat:scale_down];
 }
 
+-(UIImage*) resize:(UIImage*) image AndTargetWidth:(double) targetWidth
+{
+    Mat src = [self cvMatFromUIImage:image];
+    Mat scale_down;
+    
+    float oldWidth = src.size().width;
+    float scaleFactor = targetWidth / oldWidth;
+    float newHeight = src.size().height * scaleFactor;
+    float newWidth = oldWidth * scaleFactor;
+    
+    cv::Size size(newWidth,newHeight);
+    
+    resize(src, scale_down, size);
+    src.release();
+    return [self UIImageFromCVMat:scale_down];
+}
+
 @end

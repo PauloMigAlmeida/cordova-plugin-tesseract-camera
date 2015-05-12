@@ -34,7 +34,7 @@
 
 @implementation LDCImageResizePlugin
 
--(void)resizeImage:(CDVInvokedUrlCommand *)command
+-(void)resizeImageByFactor:(CDVInvokedUrlCommand *)command
 {
     NSString* imageData = (NSString*)[command.arguments objectAtIndex:0];
     double factorHorizontalAxis = [(NSNumber*)[command.arguments objectAtIndex:1] doubleValue];

@@ -21,4 +21,6 @@
 -(double) calculateSkewAngle:(UIImage*) image;
 -(UIImage*) resize:(UIImage*) image AndFactorX:(double) factorX AndFactorY:(double) factorY;
 
+-(UIImage*) resize:(UIImage*) image AndTargetWidth:(double) targetWidth;
+
 @end

@@ -43,6 +43,6 @@
 
 @interface LDCImageResizePlugin : CDVPlugin
 
--(void) resizeImage:(CDVInvokedUrlCommand*) command;
+-(void) resizeImageByFactor:(CDVInvokedUrlCommand*) command;
 
 @end
