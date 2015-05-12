@@ -35,5 +35,6 @@
 @interface UIImage (Base64)
 
 -(NSString*) base64StringFromImage;
+-(NSString*) base64StringFromImage:(float) quality;
 
 @end

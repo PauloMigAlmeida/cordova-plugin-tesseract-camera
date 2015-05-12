@@ -53,6 +53,6 @@ exports.resizeImageByFactor = function (imageData, factorHorizontalAxis, factorV
     exec(callbackSuccess, callbackFailure, 'CordovaTesseractImageResize', 'resizeImageByFactor', [imageData, factorHorizontalAxis, factorVerticalAxis]);
 };
 
-exports.resizeImageKeepAspectRatio = function (imageData, targetWidth, callbackSuccess, callbackFailure){
-    exec(callbackSuccess, callbackFailure, 'CordovaTesseractImageResize', 'resizeImageKeepAspectRatio', [imageData, targetWidth]);
+exports.resizeImageKeepAspectRatio = function (imageData, targetWidth, qualityOutput, callbackSuccess, callbackFailure){
+    exec(callbackSuccess, callbackFailure, 'CordovaTesseractImageResize', 'resizeImageKeepAspectRatio', [imageData, targetWidth, qualityOutput]);
 };

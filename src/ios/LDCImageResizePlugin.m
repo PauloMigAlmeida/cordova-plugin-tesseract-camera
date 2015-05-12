@@ -66,6 +66,10 @@
 {
     NSString* imageData = (NSString*)[command.arguments objectAtIndex:0];
     double targetWidth = [(NSNumber*)[command.arguments objectAtIndex:1] doubleValue];
+    double qualityOutput = [(NSNumber*)[command.arguments objectAtIndex:2] doubleValue];
+    
+    if (qualityOutput == 0.0)
+        qualityOutput = 1.0;
     
     __weak LDCImageResizePlugin* weakSelf = self;
     

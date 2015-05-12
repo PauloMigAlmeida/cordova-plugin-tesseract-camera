@@ -34,8 +34,14 @@
 
 @implementation UIImage (Base64)
 
+
 -(NSString*) base64StringFromImage{
-    NSData *imageData = UIImageJPEGRepresentation(self, 1.0);
+    return [self base64StringFromImage:1.0];
+}
+
+-(NSString*) base64StringFromImage:(float) quality
+{
+    NSData *imageData = UIImageJPEGRepresentation(self, quality);
     NSString* imageBase64 = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     return imageBase64;
 }
