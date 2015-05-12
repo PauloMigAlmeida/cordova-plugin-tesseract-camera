@@ -62,5 +62,32 @@
     
 }
 
+-(void)resizeImageKeepAspectRatio:(CDVInvokedUrlCommand *)command
+{
+    NSString* imageData = (NSString*)[command.arguments objectAtIndex:0];
+    double targetWidth = [(NSNumber*)[command.arguments objectAtIndex:1] doubleValue];
+    
+    __weak LDCImageResizePlugin* weakSelf = self;
+    
+    [self.commandDelegate runInBackground:^{
+        
+        LDCOpenCVIntegration* opencv  = [[LDCOpenCVIntegration alloc]init];
+        
+        UIImage* imageToBeRecognized = [imageData imageFromBase64String];
+        
+        imageToBeRecognized = [opencv resize:imageToBeRecognized AndTargetWidth:targetWidth];
+        
+        
+        // Convert NSString to Base 64
+        NSString *imageBase64 = [imageToBeRecognized base64StringFromImage];
+        
+        //Send back to JS interface
+        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:imageBase64];
+        [weakSelf.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+        
+    }];
+    
+}
+
 
 @end

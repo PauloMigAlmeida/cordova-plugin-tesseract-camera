@@ -44,5 +44,6 @@
 @interface LDCImageResizePlugin : CDVPlugin
 
 -(void) resizeImageByFactor:(CDVInvokedUrlCommand*) command;
+-(void) resizeImageKeepAspectRatio:(CDVInvokedUrlCommand*) command;
 
 @end
