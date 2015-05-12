@@ -44,10 +44,10 @@
 -(void) initialize{
 	self.backgroundColor = [UIColor colorWithRed:0.15 green:0.15 blue:0.15 alpha:1.0];
 	
-	CGSize snapStillImageCaptureButtonSize = CGSizeMake(100, 96);
+	CGSize snapStillImageCaptureButtonSize = CGSizeMake(90, 86);
 	CGRect snapStillImageCaptureButtonRect = CGRectMake(
 														(self.frame.size.width  - snapStillImageCaptureButtonSize.width ) / 2,
-														self.frame.size.height - snapStillImageCaptureButtonSize.height -10,
+														self.frame.size.height - snapStillImageCaptureButtonSize.height -7,
 														snapStillImageCaptureButtonSize.width,
 														snapStillImageCaptureButtonSize.height);
 	

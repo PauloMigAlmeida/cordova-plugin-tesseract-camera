@@ -134,22 +134,35 @@
 -(void) createUI
 {
 	
+		//fotografarNotinha
+	
+	UIView *viewBackground = [[UIView alloc] initWithFrame:CGRectMake(0,self.view.frame.size.height -137,self.view.frame.size.width,32)];
+	viewBackground.backgroundColor = [UIColor colorWithRed:0.00 green:0.00 blue:0.00 alpha:1.0];
+	[self.view addSubview:viewBackground];
+	
+	
+	UIImageView *labelNotinha = [[UIImageView alloc] initWithFrame:CGRectMake(10,self.view.frame.size.height -130,300,17)];
+	UIImage *image = [UIImage imageNamed:@"fotografarNotinha.png"];
+	labelNotinha.image = image;
+	[self.view addSubview:labelNotinha];
+	
+	
 		//Add LDCFoundationCameraFooterView
 	CGRect cameraFooterRect = CGRectMake(
 										 self.view.frame.origin.x,
-										 self.view.frame.size.height - FOOTER_DEFAULT_HEIGHT,
+										 self.view.frame.size.height - FOOTER_DEFAULT_HEIGHT +17,
 										 self.view.frame.size.width,
-										 FOOTER_DEFAULT_HEIGHT
+										 FOOTER_DEFAULT_HEIGHT -17
 										 );
 	LDCFoundationCameraFooterView* footerView = [[LDCFoundationCameraFooterView alloc] initWithFrame:cameraFooterRect];
 	
 	
 	footerView.backgroundColor = [UIColor colorWithRed:0.15 green:0.15 blue:0.15 alpha:1.0];
 	
-	CGSize snapStillImageCaptureButtonSize = CGSizeMake(100, 96);
+	CGSize snapStillImageCaptureButtonSize = CGSizeMake(90, 86);
 	CGRect snapStillImageCaptureButtonRect = CGRectMake(
 														(footerView.frame.size.width  - snapStillImageCaptureButtonSize.width ) / 2,
-														footerView.frame.size.height - snapStillImageCaptureButtonSize.height - 10,
+														footerView.frame.size.height - snapStillImageCaptureButtonSize.height - 7,
 														snapStillImageCaptureButtonSize.width,
 														snapStillImageCaptureButtonSize.height);
 	
